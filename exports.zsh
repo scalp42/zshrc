@@ -44,3 +44,5 @@ fi
 case "$TERM" in
   xterm-*color) color_prompt=yes;;
 esac
+
+export BAT_PAGER=""
