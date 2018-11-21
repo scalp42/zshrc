@@ -1,4 +1,4 @@
-eval "$(/Users/antho/.chefvm/bin/chefvm init -)"
+eval "$(/Users/$(whoami)/.chefvm/bin/chefvm init -)"
 
 # eval "$(ntfy shell-integration)"
 
