@@ -5,7 +5,7 @@ export PAGER=less
 export LANG="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
 
-export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/sbin:/Applications/Google\ Chrome.app/Contents/MacOS:$PATH
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/sbin:/Applications/Google\ Chrome.app/Contents/MacOS:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.5.0/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -32,9 +32,9 @@ export HOMEBREW_NO_ANALYTICS=1
 export PACKER_TIMESTAMP=$(timestamp)
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
 
-if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; 
+if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1;
 then
   export TERM=gnome-256color
 elif infocmp xterm-256color >/dev/null 2>&1; then
