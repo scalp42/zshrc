@@ -12,7 +12,7 @@ ZSH_THEME="juanghurtado"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(zsh_reload extract cp git sublime docker boot2docker)# gpg-agent)
+plugins=(zsh_reload extract cp git sublime docker boot2docker osx pyenv)# gpg-agent)
 
 local ZSH_CONF=$HOME/.zsh
 local ZSH_CACHE=$ZSH_CONF/cache
@@ -29,6 +29,7 @@ source $ZSH_CONF/alias.zsh
 source $ZSH_CONF/history.zsh
 source $ZSH_CONF/functions.zsh
 source $ZSH_CONF/exports.zsh
+# source $ZSH_CONF/sources.zsh
 
 #export "GPG_TTY=$(tty)"
 #export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
