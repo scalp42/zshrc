@@ -5,7 +5,7 @@ export PAGER=less
 export LANG="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
 
-export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/sbin:/Applications/Google\ Chrome.app/Contents/MacOS:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.5.0/bin:$PATH
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/sbin:/Applications/Google\ Chrome.app/Contents/MacOS:$PATH
 export PATH=$HOME/go/bin:$PATH
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -46,3 +46,5 @@ case "$TERM" in
 esac
 
 export BAT_PAGER=""
+
+export THEFUCK_REQUIRE_CONFIRMATION='false'

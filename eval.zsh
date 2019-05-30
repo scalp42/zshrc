@@ -1,4 +1,5 @@
-eval "$(/Users/antho/.chefvm/bin/chefvm init -)"
+eval "$(/Users/$(whoami)/.chefvm/bin/chefvm init -)"
+#eval "$(/Users/scalp/.chefvm/bin/chefvm init -)"
 
 # eval "$(ntfy shell-integration)"
 
@@ -8,4 +9,8 @@ fi
 
 if which pyenv-virtualenv-init > /dev/null; then
   eval "$(pyenv virtualenv-init -)";
+fi
+
+if which fuck > /dev/null; then
+  eval "$(thefuck --alias)";
 fi
