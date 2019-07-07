@@ -13,3 +13,7 @@ fi
 if which fuck > /dev/null; then
   eval "$(thefuck --alias)";
 fi
+
+if which hub >  /dev/null; then
+  eval "$(hub alias -s)"
+fi
