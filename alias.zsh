@@ -1,3 +1,5 @@
+source $ZSH_CONF/secrets/alias.zsh
+
 alias ll='ls -lFh'
 alias la='ls -lFha'
 alias xi='exit'
@@ -31,4 +33,4 @@ alias chefdk='eval "$(chef shell-init $PYENV_SHELL)"'
 alias dockerinit='eval "$(docker-machine env default)"; export DOCKER_IP=$(docker-machine ip default)'
 alias cat='/usr/local/bin/bat -p'
 
-alias sssh='ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=999'
+alias sssh='ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=999 @'

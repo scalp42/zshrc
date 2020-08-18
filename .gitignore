@@ -125,3 +125,5 @@ nodes
 
 cache/*history*
 cache/*zcomp*
+
+secrets/*

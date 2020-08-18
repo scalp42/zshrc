@@ -1,5 +1,7 @@
+source $ZSH_CONF/secrets/exports.zsh
+
 export EDITOR=nano
-export VISUAL=subl
+export VISUAL="subl -w -n -- ${@}"
 export PAGER=less
 # export LESS="-X"
 export LANG="en_US.UTF-8"
@@ -52,3 +54,4 @@ esac
 export BAT_PAGER=""
 
 export THEFUCK_REQUIRE_CONFIRMATION='false'
+export TLDR_PARAM='yellow'
