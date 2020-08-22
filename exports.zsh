@@ -55,3 +55,5 @@ export BAT_PAGER=""
 
 export THEFUCK_REQUIRE_CONFIRMATION='false'
 export TLDR_PARAM='yellow'
+
+export AWS_DEFAULT_REGION="us-west-2"
