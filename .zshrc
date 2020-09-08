@@ -29,7 +29,7 @@ source $ZSH_CONF/alias.zsh
 source $ZSH_CONF/history.zsh
 source $ZSH_CONF/functions.zsh
 source $ZSH_CONF/exports.zsh
-# source $ZSH_CONF/sources.zsh
+source $ZSH_CONF/sources.zsh
 
 #export "GPG_TTY=$(tty)"
 #export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
