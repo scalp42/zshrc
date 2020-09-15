@@ -14,6 +14,10 @@ if which fuck > /dev/null; then
   eval "$(thefuck --alias)";
 fi
 
-if which hub >  /dev/null; then
+if which hub > /dev/null; then
   eval "$(hub alias -s)"
+fi
+
+if which aws-vault > /dev/null; then
+  eval "$(aws-vault --completion-script-zsh)"
 fi
