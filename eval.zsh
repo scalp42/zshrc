@@ -21,3 +21,5 @@ fi
 if which aws-vault > /dev/null; then
   eval "$(aws-vault --completion-script-zsh)"
 fi
+
+# eval "$(starship init zsh)"

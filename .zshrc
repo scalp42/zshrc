@@ -44,4 +44,4 @@ autoload -U +X bashcompinit && bashcompinit
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 complete -W "$(tldr 2>/dev/null --list)" tldr
-complete -o nospace -C /usr/local/bin/nomad nomad
+# complete -o nospace -C /usr/local/bin/nomad nomad
