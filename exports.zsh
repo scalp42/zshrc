@@ -14,8 +14,8 @@ export PATH=$HOME/go/bin:$PATH
 # export LDFLAGS="-L/usr/local/opt/ruby/lib"
 # export CPPFLAGS="-I/usr/local/opt/ruby/include"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER="less -X"
@@ -54,7 +54,6 @@ esac
 
 export BAT_PAGER=""
 
-export THEFUCK_REQUIRE_CONFIRMATION='false'
 export TLDR_PARAM='yellow'
 
 export AWS_DEFAULT_REGION="us-west-2"
@@ -74,6 +73,3 @@ export NODE_REPL_MODE='sloppy';
 
 # see https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0/42265848#42265848
 export GPG_TTY=$(tty)
-
-# Highlight section titles in manual pages.
-export LESS_TERMCAP_md="${yellow}";
