@@ -12,13 +12,13 @@
 #   eval "$(pyenv virtualenv-init -)";
 # fi
 
-if which hub > /dev/null; then
-  eval "$(hub alias -s)"
-fi
+# if which hub > /dev/null; then
+#   eval "$(hub alias -s)"
+# fi
 
-if which aws-vault > /dev/null; then
-  eval "$(aws-vault --completion-script-zsh)"
-fi
+# if which aws-vault > /dev/null; then
+#   eval "$(aws-vault --completion-script-zsh)"
+# fi
 
 # eval "$(starship init zsh)"
 
