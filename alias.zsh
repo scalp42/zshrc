@@ -22,15 +22,11 @@ alias stoptime='sudo tmutil disablelocal'
 alias starttime='sudo tmutil enablelocal'
 alias gti=git
 alias ogc='open -a Google\ Chrome --args --disable-web-security'
-
-alias pipu='pip freeze | xargs pip install --upgrade'
-
-alias rmv='rvm use 2.4.2 --install --create'
-alias rmvknife='rvm use 2.2.4@chef --install --create --default'
-
+alias pipu='pip3 freeze | xargs pip install --upgrade'
+alias rmv='rvm use 2.7.1 --install --create'
 alias chefdk='eval "$(chef shell-init $PYENV_SHELL)"'
-
 alias dockerinit='eval "$(docker-machine env default)"; export DOCKER_IP=$(docker-machine ip default)'
 alias cat='/usr/local/bin/bat -p'
-
 alias sssh='ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=999 @'
+alias week='date +%V'
+alias path='echo -e ${PATH//:/\\n}'
