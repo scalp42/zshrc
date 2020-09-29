@@ -26,8 +26,7 @@ plugins=(
   colored-man-pages
   safe-paste
   redis-cli
-  nomad
-  thefuck)
+  nomad)
 
 ZSH_CONF=$HOME/.zsh
 ZSH_CACHE=$ZSH_CONF/cache
