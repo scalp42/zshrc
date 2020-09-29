@@ -36,7 +36,6 @@ setopt RCQUOTES
 unsetopt FLOW_CONTROL
 
 export HOMEBREW_NO_ANALYTICS=1
-export PACKER_TIMESTAMP=$(timestamp)
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 # export PATH="$PATH:$HOME/.rvm/bin"
