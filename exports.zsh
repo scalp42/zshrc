@@ -17,6 +17,7 @@ export PATH=$HOME/go/bin:$PATH
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
+# Don’t clear the screen after quitting a manual page.
 export MANPAGER="less -X"
 
 # Simply type the name of a directory, and it will become the current directory
@@ -61,3 +62,18 @@ export AWS_DEFAULT_REGION="us-west-2"
 export AWS_PAGER=
 
 # export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+
+export PYTHONIOENCODING='UTF-8';
+
+# Enable persistent REPL history for `node`.
+export NODE_REPL_HISTORY=~/.node_history;
+# Allow 32³ entries; the default is 1000.
+export NODE_REPL_HISTORY_SIZE='32768';
+# Use sloppy mode by default, matching web browsers.
+export NODE_REPL_MODE='sloppy';
+
+# see https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0/42265848#42265848
+export GPG_TTY=$(tty)
+
+# Highlight section titles in manual pages.
+export LESS_TERMCAP_md="${yellow}";
