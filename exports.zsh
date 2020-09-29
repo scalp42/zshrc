@@ -1,5 +1,3 @@
-source $ZSH_CONF/secrets/exports.zsh
-
 export EDITOR=nano
 export VISUAL="subl -w -n -- ${@}"
 export PAGER=less
@@ -72,3 +70,5 @@ export NODE_REPL_MODE='sloppy';
 
 # see https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0/42265848#42265848
 export GPG_TTY=$(tty)
+
+test -e "$ZSH_CONF/secrets/exports.zsh" && source $ZSH_CONF/secrets/exports.zsh

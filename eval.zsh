@@ -21,3 +21,5 @@ if which aws-vault > /dev/null; then
 fi
 
 # eval "$(starship init zsh)"
+
+test -e "$ZSH_CONF/secrets/eval.zsh" && source $ZSH_CONF/secrets/eval.zsh
