@@ -1,4 +1,5 @@
 -- NOTE: see https://github.com/Tarrasch/antigen-hs
+-- NOTE: "source ~/.zsh/antigen-hs/init.zsh" in .zshrc
 -- BUG: broken due to https://github.com/Tarrasch/antigen-hs/issues/23
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ExtendedDefaultRules #-}
