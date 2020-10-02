@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Share history between multiple shells
 setopt SHARE_HISTORY
 

@@ -1,10 +1,9 @@
-# pyenv init takes care of that
-# $(pyenv root)/completions/pyenv.zsh
+#!/usr/bin/env zsh
 
-# if [[ -f "$(brew --prefix)/opt/mcfly/mcfly.bash" ]]; then
-#  source "$(brew --prefix)/opt/mcfly/mcfly.bash"
-# fi
+# NOTE: see https://www.iterm2.com/documentation-shell-integration.html
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-if [[ -f "/usr/local/bin/aws_zsh_completer.sh" ]]; then
+
+if [[ -a "/usr/local/bin/aws_zsh_completer.sh" ]]; then
   source "/usr/local/bin/aws_zsh_completer.sh"
 fi

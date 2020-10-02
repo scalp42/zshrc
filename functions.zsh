@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 function greph () {
   history | grep $1
 }

@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 export EDITOR=nano
 export VISUAL="subl -w -n -- ${@}"
 export PAGER=less
@@ -7,13 +9,6 @@ export LC_ALL=en_US.UTF-8
 
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/sbin:/Applications/Google\ Chrome.app/Contents/MacOS:$PATH
 export PATH=$HOME/go/bin:$PATH
-
-# export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
-# export LDFLAGS="-L/usr/local/opt/ruby/lib"
-# export CPPFLAGS="-I/usr/local/opt/ruby/include"
-
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER="less -X"
@@ -71,4 +66,6 @@ export NODE_REPL_MODE='sloppy';
 # see https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0/42265848#42265848
 export GPG_TTY=$(tty)
 
-test -e "$ZSH_CONF/secrets/exports.zsh" && source $ZSH_CONF/secrets/exports.zsh
+if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
+  source "$ZSH_CONF/secrets/exports.zsh"
+fi

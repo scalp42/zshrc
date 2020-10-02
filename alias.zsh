@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 alias ll='ls -lFh'
 alias la='ls -lFha'
 alias xi='exit'
@@ -28,5 +30,11 @@ alias cat='/usr/local/bin/bat -p'
 alias sssh='ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=999 @'
 alias week='date +%V'
 alias path='echo -e ${PATH//:/\\n}'
+
+# NOTE: if pbzip2/pigz are available, alias them as they are drop-in replacements for bzip2/gzip, respectively
+if (( ${+commands[pbzip2]} )) alias bzip2='pbzip2'
+if (( ${+commands[pbunzip2]} )) alias bunzip2='pbunzip2'
+if (( ${+commands[pigz]} )) alias gzip='pigz'
+if (( ${+commands[unpigz]} )) alias gunzip='unpigz'
 
 test -e "$ZSH_CONF/secrets/alias.zsh" && source $ZSH_CONF/secrets/alias.zsh
