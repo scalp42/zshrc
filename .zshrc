@@ -41,9 +41,6 @@ fi
 source $ZSH_CONF/history.zsh
 source $ZSH_CONF/functions.zsh
 source $ZSH_CONF/alias.zsh
-source $ZSH_CONF/sources.zsh
 source $ZSH_CONF/exports.zsh
+source $ZSH_CONF/sources.zsh
 source $ZSH_CONF/eval.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

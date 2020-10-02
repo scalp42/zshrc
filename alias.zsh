@@ -37,4 +37,6 @@ if (( ${+commands[pbunzip2]} )) alias bunzip2='pbunzip2'
 if (( ${+commands[pigz]} )) alias gzip='pigz'
 if (( ${+commands[unpigz]} )) alias gunzip='unpigz'
 
-test -e "$ZSH_CONF/secrets/alias.zsh" && source $ZSH_CONF/secrets/alias.zsh
+if [[ -a "$ZSH_CONF/secrets/alias.zsh" ]]; then
+  source "$ZSH_CONF/secrets/alias.zsh"
+fi
