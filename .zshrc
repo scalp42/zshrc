@@ -7,7 +7,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-. $(brew --prefix asdf)/asdf.sh
+. /usr/local/opt/asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 
 export ZSH_CONF=$HOME/.zsh
@@ -44,3 +44,8 @@ source $ZSH_CONF/alias.zsh
 source $ZSH_CONF/exports.zsh
 source $ZSH_CONF/sources.zsh
 source $ZSH_CONF/eval.zsh
+
+# NOTE: https://github.com/trapd00r/LS_COLORS
+# source $ZSH_CONF/colors.zsh
+
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}

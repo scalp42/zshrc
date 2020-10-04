@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-alias ll='ls -lFh'
-alias la='ls -lFha'
+alias ll='ls -lFh --color'
+alias la='ls -lFha --color'
 alias xi='exit'
 alias htop='sudo htop'
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; mas upgrade'

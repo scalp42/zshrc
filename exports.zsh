@@ -66,6 +66,9 @@ export NODE_REPL_MODE='sloppy';
 # see https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0/42265848#42265848
 export GPG_TTY=$(tty)
 
+# NOTE: brew install vivid (https://github.com/sharkdp/vivid)
+if (( $+commands[vivid] )) export LS_COLORS="$(vivid generate molokai)"
+
 if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
   source "$ZSH_CONF/secrets/exports.zsh"
 fi
