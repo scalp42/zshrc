@@ -9,4 +9,5 @@ fi
 # NOTE: https://github.com/ajeetdsouza/zoxide
 # if (( ${+commands[zoxide]} )) eval "$(zoxide init zsh)"
 
+# NOTE: https://github.com/gsamokovarov/jump
 eval "$(jump shell)"
