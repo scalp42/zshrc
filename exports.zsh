@@ -69,6 +69,8 @@ export GPG_TTY=$(tty)
 # NOTE: brew install vivid (https://github.com/sharkdp/vivid)
 if (( $+commands[vivid] )) export LS_COLORS="$(vivid generate molokai)"
 
+export COMPLETION_WAITING_DOTS=true
+
 if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
   source "$ZSH_CONF/secrets/exports.zsh"
 fi

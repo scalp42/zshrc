@@ -44,6 +44,7 @@ source $ZSH_CONF/alias.zsh
 source $ZSH_CONF/exports.zsh
 source $ZSH_CONF/sources.zsh
 source $ZSH_CONF/eval.zsh
+source $ZSH_CONF/completion.zsh
 
 # NOTE: https://github.com/trapd00r/LS_COLORS
 # source $ZSH_CONF/colors.zsh
