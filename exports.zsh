@@ -71,6 +71,10 @@ if (( $+commands[vivid] )) export LS_COLORS="$(vivid generate molokai)"
 
 export COMPLETION_WAITING_DOTS=true
 
+# NOTE: https://github.com/unixorn/autoupdate-zgen
+export ZGEN_PLUGIN_UPDATE_DAYS=7
+export ZGEN_SYSTEM_UPDATE_DAYS=7
+
 if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
   source "$ZSH_CONF/secrets/exports.zsh"
 fi

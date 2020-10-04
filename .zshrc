@@ -12,6 +12,7 @@ fpath=(${ASDF_DIR}/completions $fpath)
 
 export ZSH_CONF=$HOME/.zsh
 export ZSH_CACHE=$ZSH_CONF/cache
+export ZSH_CACHE_DIR=$ZSH_CACHE
 export ZSH_COMPDUMP="${ZSH_CACHE}/.zcompdump-${(%):-%m}-${ZSH_VERSION}"
 
 autoload -Uz compinit && \
@@ -24,16 +25,19 @@ if ! zgen saved; then
 
   zgen load romkatv/powerlevel10k powerlevel10k
   zgen oh-my-zsh plugins/extract
+  zgen load unixorn/fzf-zsh-plugin
   zgen oh-my-zsh plugins/cp
   zgen oh-my-zsh plugins/sublime
-  zgen oh-my-zsh plugins/docker
-  zgen oh-my-zsh plugins/autojump
   zgen oh-my-zsh plugins/fd
+  zgen oh-my-zsh plugins/encode64
+  zgen load djui/alias-tips
   zgen oh-my-zsh plugins/colored-man-pages
   zgen oh-my-zsh plugins/safe-paste
   zgen oh-my-zsh plugins/redis-cli
-  zgen oh-my-zsh plugins/nomad
-  zgen load unixorn/fzf-zsh-plugin
+  zgen load unixorn/git-extra-commands
+
+  # NOTE: a bit
+  # zgen load unixorn/autoupdate-zgen
 
   zgen save
 fi

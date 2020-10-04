@@ -68,3 +68,5 @@ function chefall() {
 function timestamp() {
  date +%m-%d-%Y_%T | tr -d '\n'
 }
+
+if (( ${+commands[jump]} )) jc() { j "$(basename $PWD)/*/$@" }
