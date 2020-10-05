@@ -36,7 +36,10 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/redis-cli
   zgen load unixorn/git-extra-commands
 
-  # NOTE: a bit
+  # NOTE: https://github.com/wfxr/forgit
+  # zgen load 'wfxr/forgit'
+
+  # NOTE: a bit slow
   # zgen load unixorn/autoupdate-zgen
 
   zgen save

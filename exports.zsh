@@ -78,3 +78,6 @@ export ZGEN_SYSTEM_UPDATE_DAYS=7
 if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
   source "$ZSH_CONF/secrets/exports.zsh"
 fi
+
+# NOTE: https://github.com/junegunn/fzf#settings
+export FZF_COMPLETION_TRIGGER='~~'
