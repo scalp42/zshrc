@@ -70,6 +70,9 @@ if ! zgen saved; then
   # NOTE: https://github.com/paoloantinori/hhighlighter
   zgen load paoloantinori/hhighlighter
 
+  # NOTE: https://github.com/hlissner/zsh-autopair
+  zgen load hlissner/zsh-autopair
+
   zgen save
 fi
 
