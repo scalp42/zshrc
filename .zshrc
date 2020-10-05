@@ -15,6 +15,15 @@ export ZSH_CACHE=$ZSH_CONF/cache
 export ZSH_CACHE_DIR=$ZSH_CACHE
 export ZSH_COMPDUMP="${ZSH_CACHE}/.zcompdump-${(%):-%m}-${ZSH_VERSION}"
 
+ZSH_AUTOLOAD=${ZSH_CONF}/autoload
+fpath+="${ZSH_AUTOLOAD}"
+if [[ -d "$ZSH_AUTOLOAD" ]]; then
+    for func in $ZSH_AUTOLOAD/*; do
+        autoload -Uz ${func:t}
+    done
+fi
+unset ZSH_AUTOLOAD
+
 autoload -Uz compinit && \
    compinit -C -d $ZSH_COMPDUMP
 
@@ -55,7 +64,8 @@ source $ZSH_CONF/alias.zsh
 source $ZSH_CONF/exports.zsh
 source $ZSH_CONF/sources.zsh
 source $ZSH_CONF/eval.zsh
-source $ZSH_CONF/completion.zsh
+source $ZSH_CONF/completions.zsh
+source $ZSH_CONF/directories.zsh
 
 # NOTE: https://github.com/trapd00r/LS_COLORS
 # source $ZSH_CONF/colors.zsh
