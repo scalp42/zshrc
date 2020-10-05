@@ -73,6 +73,10 @@ if ! zgen saved; then
   # NOTE: https://github.com/hlissner/zsh-autopair
   zgen load hlissner/zsh-autopair
 
+  # NOTE:https://github.com/marzocchi/zsh-notify
+  # NOTE: brew install terminal-notifier
+  zgen load marzocchi/zsh-notify
+
   zgen save
 fi
 
