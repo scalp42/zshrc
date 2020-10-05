@@ -45,6 +45,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/redis-cli
   zgen load unixorn/git-extra-commands
   zgen load zsh-users/zsh-syntax-highlighting
+  zgen oh-my-zsh plugins/urltools
 
   # NOTE: https://github.com/zsh-users/zsh-autosuggestions
   # zgen load zsh-users/zsh-autosuggestions
@@ -58,6 +59,8 @@ if ! zgen saved; then
   zgen save
 fi
 
+source $ZSH_CONF/directories.zsh
+# source $ZSH_CONF/compfix.zsh
 source $ZSH_CONF/history.zsh
 source $ZSH_CONF/functions.zsh
 source $ZSH_CONF/alias.zsh
@@ -65,7 +68,6 @@ source $ZSH_CONF/exports.zsh
 source $ZSH_CONF/sources.zsh
 source $ZSH_CONF/eval.zsh
 source $ZSH_CONF/completions.zsh
-source $ZSH_CONF/directories.zsh
 
 # NOTE: https://github.com/trapd00r/LS_COLORS
 # source $ZSH_CONF/colors.zsh
