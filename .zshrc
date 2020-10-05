@@ -34,7 +34,6 @@ if ! zgen saved; then
   echo "Initializing..."
 
   zgen load romkatv/powerlevel10k powerlevel10k
-  zgen oh-my-zsh plugins/extract
   zgen load unixorn/fzf-zsh-plugin
   zgen oh-my-zsh plugins/cp
   zgen oh-my-zsh plugins/sublime
