@@ -81,3 +81,6 @@ fi
 
 # NOTE: https://github.com/junegunn/fzf#settings
 export FZF_COMPLETION_TRIGGER='~~'
+
+# NOTE: https://github.com/zsh-users/zsh-autosuggestions#enable-asynchronous-mode
+export ZSH_AUTOSUGGEST_USE_ASYNC=true

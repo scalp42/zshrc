@@ -35,6 +35,10 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/safe-paste
   zgen oh-my-zsh plugins/redis-cli
   zgen load unixorn/git-extra-commands
+  zgen load zsh-users/zsh-syntax-highlighting
+
+  # NOTE: https://github.com/zsh-users/zsh-autosuggestions
+  # zgen load zsh-users/zsh-autosuggestions
 
   # NOTE: https://github.com/wfxr/forgit
   # zgen load 'wfxr/forgit'
