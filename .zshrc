@@ -99,4 +99,3 @@ zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
 zstyle ':notify:*' command-complete-timeout 15
 zstyle ':notify:*' enable-on-ssh yes
 zstyle ':notify:*' blacklist-regex 'find|git'
-zstyle ':notify:*' error-log /dev/null
