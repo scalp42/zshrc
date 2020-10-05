@@ -47,6 +47,9 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
   zgen oh-my-zsh plugins/urltools
 
+  # NOTE: https://github.com/peterhurford/up.zsh
+  zgen load peterhurford/up.zsh
+
   # NOTE: https://github.com/zsh-users/zsh-autosuggestions
   # zgen load zsh-users/zsh-autosuggestions
 
