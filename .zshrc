@@ -45,7 +45,11 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/safe-paste
   zgen oh-my-zsh plugins/redis-cli
   zgen load unixorn/git-extra-commands
-  zgen load zsh-users/zsh-syntax-highlighting
+
+  # NOTE: supports themes
+  zgen load zdharma/fast-syntax-highlighting
+  # zgen load zsh-users/zsh-syntax-highlighting
+
   zgen oh-my-zsh plugins/urltools
 
   # NOTE: https://github.com/peterhurford/up.zsh
