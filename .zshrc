@@ -70,7 +70,7 @@ if ! zgen saved; then
   # NOTE: https://github.com/hlissner/zsh-autopair
   zgen load hlissner/zsh-autopair
 
-  # NOTE:https://github.com/marzocchi/zsh-notify
+  # NOTE: https://github.com/marzocchi/zsh-notify
   # NOTE: brew install terminal-notifier
   zgen load marzocchi/zsh-notify
 
@@ -92,3 +92,12 @@ source $ZSH_CONF/completions.zsh
 # source $ZSH_CONF/colors.zsh
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# NOTE: https://github.com/marzocchi/zsh-notify
+zstyle ':notify:*' error-title "Command failed (in #{time_elapsed} seconds)"
+zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
+zstyle ':notify:*' command-complete-timeout 15
+zstyle ':notify:*' enable-on-ssh yes
+zstyle ':notify:*' blacklist-regex 'find|git'
+zstyle ':notify:*' error-log /dev/null
+
