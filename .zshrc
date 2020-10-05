@@ -45,9 +45,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/redis-cli
   zgen load unixorn/git-extra-commands
 
-  # NOTE: supports themes
   zgen load zdharma/fast-syntax-highlighting
-  # zgen load zsh-users/zsh-syntax-highlighting
 
   zgen oh-my-zsh plugins/urltools
 
@@ -82,7 +80,6 @@ if ! zgen saved; then
 fi
 
 source $ZSH_CONF/directories.zsh
-# source $ZSH_CONF/compfix.zsh
 source $ZSH_CONF/history.zsh
 source $ZSH_CONF/functions.zsh
 source $ZSH_CONF/alias.zsh
