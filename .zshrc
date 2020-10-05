@@ -77,6 +77,8 @@ if ! zgen saved; then
   # NOTE: brew install terminal-notifier
   zgen load marzocchi/zsh-notify
 
+  zgen oh-my-zsh plugins/tmux
+
   zgen save
 fi
 

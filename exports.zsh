@@ -75,12 +75,14 @@ export COMPLETION_WAITING_DOTS=true
 export ZGEN_PLUGIN_UPDATE_DAYS=7
 export ZGEN_SYSTEM_UPDATE_DAYS=7
 
-if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
-  source "$ZSH_CONF/secrets/exports.zsh"
-fi
-
 # NOTE: https://github.com/junegunn/fzf#settings
 export FZF_COMPLETION_TRIGGER='~~'
 
 # NOTE: https://github.com/zsh-users/zsh-autosuggestions#enable-asynchronous-mode
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+export ZSH_TMUX_UNICODE=true
+
+if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
+  source "$ZSH_CONF/secrets/exports.zsh"
+fi
