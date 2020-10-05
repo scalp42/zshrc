@@ -63,6 +63,9 @@ if ! zgen saved; then
   # NOTE: https://github.com/qoomon/zsh-lazyload
   zgen load qoomon/zsh-lazyload
 
+  # NOTE: https://github.com/paoloantinori/hhighlighter
+  zgen load paoloantinori/hhighlighter
+
   zgen save
 fi
 
