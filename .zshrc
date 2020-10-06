@@ -82,6 +82,9 @@ if ! zgen saved; then
   # NOTE: https://github.com/ChrisPenner/copy-pasta
   zgen load ChrisPenner/copy-pasta
 
+  # NOTE: https://github.com/peterhurford/git-it-on.zsh
+  zgen load peterhurford/git-it-on.zsh
+
   zgen save
 fi
 
