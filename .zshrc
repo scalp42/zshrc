@@ -73,6 +73,9 @@ if ! zgen saved; then
 
   zgen oh-my-zsh plugins/tmux
 
+  # NOTE: https://github.com/mroth/evalcache (vs zsh-lazyload)
+  # zgen load mroth/evalcache
+
   zgen save
 fi
 
@@ -84,6 +87,7 @@ source $ZSH_CONF/exports.zsh
 source $ZSH_CONF/sources.zsh
 source $ZSH_CONF/eval.zsh
 source $ZSH_CONF/completions.zsh
+source $ZSH_CONF/fuck.zsh
 
 # NOTE: https://github.com/trapd00r/LS_COLORS
 # source $ZSH_CONF/colors.zsh

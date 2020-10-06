@@ -7,6 +7,9 @@ fi
 # NOTE: https://github.com/qoomon/zsh-lazyload
 lazyload fuck -- 'eval $(thefuck --alias)'
 
+# NOTE: https://github.com/mroth/evalcache
+# _evalcache thefuck --alias
+
 fuck-command-line() {
     local FUCK="$(THEFUCK_REQUIRE_CONFIRMATION=0 thefuck $(fc -ln -1 | tail -n 1) 2> /dev/null)"
     [[ -z $FUCK ]] && echo -n -e "\a" && return
