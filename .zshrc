@@ -45,8 +45,6 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/redis-cli
   zgen load unixorn/git-extra-commands
 
-  zgen load zdharma/fast-syntax-highlighting
-
   zgen oh-my-zsh plugins/urltools
 
   # NOTE: https://github.com/zsh-users/zsh-autosuggestions
@@ -102,6 +100,14 @@ if ! zgen saved; then
 
   # NOTE: https://github.com/mdumitru/last-working-dir
   zgen load mdumitru/last-working-dir
+
+  # NOTE: https://github.com/micrenda/zsh-nohup
+  zgen load micrenda/zsh-nohup
+
+  # NOTE: https://github.com/robertzk/send.zsh
+  zgen load robertzk/send.zsh
+
+  zgen load zdharma/fast-syntax-highlighting
 
   zgen save
 fi
