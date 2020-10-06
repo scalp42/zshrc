@@ -88,6 +88,12 @@ if ! zgen saved; then
   # NOTE: https://github.com/caarlos0-graveyard/zsh-git-sync
   zgen load caarlos0-graveyard/zsh-git-sync
 
+  # NOTE: https://github.com/axtl/gpg-agent.zsh
+  # zgen load axtl/gpg-agent.zsh
+
+  # NOTE: https://github.com/rummik/zsh-ing
+  zgen load rummik/zsh-ing
+
   zgen save
 fi
 
