@@ -79,6 +79,9 @@ if ! zgen saved; then
   # NOTE: https://github.com/rtuin/zsh-case
   zgen load rtuin/zsh-case
 
+  # NOTE: https://github.com/ChrisPenner/copy-pasta
+  zgen load ChrisPenner/copy-pasta
+
   zgen save
 fi
 
