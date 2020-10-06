@@ -85,6 +85,9 @@ if ! zgen saved; then
   # NOTE: https://github.com/peterhurford/git-it-on.zsh
   zgen load peterhurford/git-it-on.zsh
 
+  # NOTE: https://github.com/caarlos0-graveyard/zsh-git-sync
+  zgen load caarlos0-graveyard/zsh-git-sync
+
   zgen save
 fi
 
