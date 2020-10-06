@@ -76,6 +76,9 @@ if ! zgen saved; then
   # NOTE: https://github.com/mroth/evalcache (vs zsh-lazyload)
   # zgen load mroth/evalcache
 
+  # NOTE: https://github.com/rtuin/zsh-case
+  zgen load rtuin/zsh-case
+
   zgen save
 fi
 
