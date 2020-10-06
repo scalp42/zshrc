@@ -97,6 +97,12 @@ if ! zgen saved; then
   # NOTE: https://github.com/reegnz/jq-zsh-plugin
   zgen load reegnz/jq-zsh-plugin
 
+  # NOTE: https://github.com/supercrabtree/k
+  zgen load supercrabtree/k
+
+  # NOTE: https://github.com/mdumitru/last-working-dir
+  zgen load mdumitru/last-working-dir
+
   zgen save
 fi
 
