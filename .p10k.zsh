@@ -1513,7 +1513,7 @@
   #    p10k segment -f 208 -i '⭐' -t 'hello, %n'
   # }
   function prompt_logo() {
-    p10k segment -f 208 -i '⌘ '
+    p10k segment -f 208 -i '🔥 '
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job

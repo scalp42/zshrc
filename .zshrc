@@ -64,7 +64,7 @@ if ! zgen saved; then
   zgen load qoomon/zsh-lazyload
 
   # NOTE: https://github.com/paoloantinori/hhighlighter
-  zgen load paoloantinori/hhighlighter
+  # zgen load paoloantinori/hhighlighter
 
   # NOTE: https://github.com/hlissner/zsh-autopair
   zgen load hlissner/zsh-autopair
@@ -137,4 +137,4 @@ zstyle ':notify:*' error-title "Command failed (in #{time_elapsed} seconds)"
 zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
 zstyle ':notify:*' command-complete-timeout 15
 zstyle ':notify:*' enable-on-ssh yes
-zstyle ':notify:*' blacklist-regex 'find|git'
+zstyle ':notify:*' blacklist-regex 'find|git|cd|l|ll|ls|cat|bat|man|gti'
