@@ -94,6 +94,9 @@ if ! zgen saved; then
   # NOTE: https://github.com/rummik/zsh-ing
   zgen load rummik/zsh-ing
 
+  # NOTE: https://github.com/reegnz/jq-zsh-plugin
+  zgen load reegnz/jq-zsh-plugin
+
   zgen save
 fi
 
