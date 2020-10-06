@@ -111,6 +111,7 @@ if ! zgen saved; then
   # NOTE: https://github.com/robertzk/send.zsh
   zgen load robertzk/send.zsh
 
+  # NOTE: load last
   zgen load zdharma/fast-syntax-highlighting
 
   zgen save
