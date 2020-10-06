@@ -36,7 +36,11 @@ if ! zgen saved; then
   zgen load romkatv/powerlevel10k powerlevel10k
   zgen load unixorn/fzf-zsh-plugin
   zgen oh-my-zsh plugins/cp
+
+  # NOTE: opens in current window instead of new one
+  # zgen load valentinocossar/sublime
   zgen oh-my-zsh plugins/sublime
+
   zgen oh-my-zsh plugins/fd
   zgen oh-my-zsh plugins/encode64
   zgen load djui/alias-tips
