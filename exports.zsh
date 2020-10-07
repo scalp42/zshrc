@@ -44,8 +44,6 @@ case "$TERM" in
   xterm-*color) color_prompt=yes;;
 esac
 
-export BAT_PAGER=""
-
 export TLDR_PARAM='yellow'
 
 export AWS_DEFAULT_REGION="us-west-2"
