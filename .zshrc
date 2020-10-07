@@ -126,6 +126,8 @@ source $ZSH_CONF/sources.zsh
 source $ZSH_CONF/eval.zsh
 source $ZSH_CONF/completions.zsh
 source $ZSH_CONF/fuck.zsh
+source $ZSH_CONF/termsupport.zsh
+source $ZSH_CONF/compfix.zsh
 
 # NOTE: https://github.com/trapd00r/LS_COLORS
 # source $ZSH_CONF/colors.zsh

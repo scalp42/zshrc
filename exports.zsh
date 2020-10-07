@@ -81,6 +81,8 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 export ZSH_TMUX_UNICODE=true
 
+export BAT_PAGER=
+
 if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
   source "$ZSH_CONF/secrets/exports.zsh"
 fi
