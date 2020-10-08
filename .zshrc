@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# NOTE: uncomment me to profile
+# zmodload zsh/zprof
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -140,3 +143,6 @@ zstyle ':notify:*' success-title "Command finished (in #{time_elapsed} seconds)"
 zstyle ':notify:*' command-complete-timeout 15
 zstyle ':notify:*' enable-on-ssh yes
 zstyle ':notify:*' blacklist-regex 'find|git|cd|l|ll|ls|cat|bat|man|gti'
+
+# NOTE: uncomment to profile
+# zprof
