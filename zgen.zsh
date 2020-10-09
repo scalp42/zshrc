@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+ZGEN_HOME=~/.zgen
+
 . /usr/local/opt/asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 
@@ -14,6 +16,11 @@ unset ZSH_AUTOLOAD
 
 autoload -Uz compinit && \
    compinit -C -d $ZSH_COMPDUMP
+
+
+if [[ ! -f $ZGEN_HOME/zgen.zsh ]]; then
+  git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+fi
 
 source "${HOME}/.zgen/zgen.zsh"
 
