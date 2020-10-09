@@ -1,5 +1,17 @@
 #!/usr/bin/env zsh
 
+# NOTE: https://github.com/zsh-users/zsh-autosuggestions#disabling-automatic-widget-re-binding
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# NOTE: https://github.com/zsh-users/zsh-autosuggestions#enable-asynchronous-mode
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+# NOTE: https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# NOTE: make pasting into terminal faster
+DISABLE_MAGIC_FUNCTIONS=true
+
 export EDITOR=nano
 export VISUAL="subl -w -n -- ${@}"
 export PAGER=less
@@ -75,9 +87,6 @@ export ZGEN_SYSTEM_UPDATE_DAYS=7
 
 # NOTE: https://github.com/junegunn/fzf#settings
 export FZF_COMPLETION_TRIGGER='~~'
-
-# NOTE: https://github.com/zsh-users/zsh-autosuggestions#enable-asynchronous-mode
-export ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 export ZSH_TMUX_UNICODE=true
 
