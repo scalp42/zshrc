@@ -17,9 +17,9 @@ zinit ice depth=1 atload"source $ZSH_CONF/.p10k.zsh; _p9k_precmd" nocd wait'!' l
 # zinit light romkatv/powerlevel10k
 zinit light scalp42/powerlevel10k
 
-zinit wait lucid for \
+zinit wait lucid for    \
   OMZL::directories.zsh \
-  OMZL::completion.zsh \
+  OMZL::completion.zsh  \
   OMZL::termsupport.zsh \
   OMZL::compfix.zsh
 
@@ -43,7 +43,7 @@ zinit light unixorn/fzf-zsh-plugin
 zinit wait=1 lucid for            \
   OMZP::cp                        \
   OMZP::sublime                   \
-  OMZP::encode64                   \
+  OMZP::encode64                  \
   djui/alias-tips                 \
   OMZP::colored-man-pages         \
   OMZP::safe-paste                \
