@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 PS1=
-# NOTE: pick your poison 👨‍🔬
 ZINIT_HOME=~/.zinit
 declare -A ZINIT
 ZINIT[OPTIMIZE_OUT_DISK_ACCESSES]=1
