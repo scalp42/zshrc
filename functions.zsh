@@ -69,4 +69,14 @@ function timestamp() {
  date +%m-%d-%Y_%T | tr -d '\n'
 }
 
+function avg-time() {
+    float sum=0
+    integer count=${1:-10}
+    repeat $count { time zsh -ic exit } |& \
+        while IFS='' read line; do
+      sum+=${${${line% total}##* }//,/.}
+        done
+    print $(( sum / count ))
+}
+
 if (( ${+commands[jump]} )) jc() { j "$(basename $PWD)/*/$@" }
