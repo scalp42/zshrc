@@ -14,7 +14,6 @@ export ZSH_CONF=$HOME/.zsh
 export ZSH_CACHE=$ZSH_CONF/cache
 export ZSH_CACHE_DIR=$ZSH_CACHE
 export ZSH_COMPDUMP="${ZSH_CACHE}/.zcompdump-${(%):-%m}-${ZSH_VERSION}"
-export ZSH_EVALCACHE_DIR=$ZSH_CACHE
 
 # NOTE: pick your poison 👨‍🔬
 source $ZSH_CONF/zinit.zsh
