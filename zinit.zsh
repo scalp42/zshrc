@@ -12,9 +12,8 @@ fi
 
 source ~/.zinit/bin/zinit.zsh
 
-
 zinit ice depth=1 atload"source $ZSH_CONF/.p10k.zsh; _p9k_precmd" nocd wait'!' lucid
-# NOTE: my fork turn off the warning about instant prompt
+# NOTE: my fork turns off the warning about instant prompt
 # zinit light romkatv/powerlevel10k
 zinit light scalp42/powerlevel10k
 
@@ -61,8 +60,6 @@ zinit wait=1 lucid for            \
   robertzk/send.zsh               \
 
 
-# zinit ice wait=1 lucid; zinit light OMZP::thefuck
-
 # NOTE: https://github.com/zsh-users/zsh-autosuggestions
 # zinit ice wait"1" lucid atload"!_zsh_autosuggest_start"
 # zinit light zsh-users/zsh-autosuggestions
@@ -83,6 +80,10 @@ zinit ice wait lucid atload'
   zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti"'
 zinit light marzocchi/zsh-notify
 
+# zinit ice wait lucid atload"
+#   zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_packer' 'id_rsa_terraform' 'id_rsa_inspec'
+# "
+# zinit snippet PZT::modules/ssh/init.zsh
 
 # NOTE: https://github.com/axtl/gpg-agent.zsh
 # zinit ice wait"1" lucid
