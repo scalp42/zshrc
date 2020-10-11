@@ -58,6 +58,7 @@ zinit wait=1 lucid for            \
   caarlos0-graveyard/zsh-git-sync \
   rummik/zsh-ing                  \
   robertzk/send.zsh               \
+  OMZP::sublime-merge             \
 
 
 # NOTE: https://github.com/zsh-users/zsh-autosuggestions
