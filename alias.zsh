@@ -1,7 +1,18 @@
 #!/usr/bin/env zsh
 
-alias ll='ls -lFh --color'
-alias la='ls -lFha --color'
+# NOTE: prefer exa
+# alias ll='ls -lFh --color'
+# alias la='ls -lFha --color'
+
+# NOTE: brew install exa
+alias ls='exa --classify --across --git'
+alias ll='exa --classify --long --binary --group --git'
+alias la='exa --classify --long --binary --group --git --all'
+alias tree='exa --classify --long --binary --group --tree --git'
+alias lsr='exa --classify --across --git --recurse'
+alias llr='exa --classify --long --binary --group --git --recurse'
+alias lar='exa --classify --long --binary --group --git --all --recurse'
+
 alias xi='exit'
 alias htop='sudo htop'
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; mas upgrade'
