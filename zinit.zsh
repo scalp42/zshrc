@@ -25,16 +25,16 @@ zinit wait lucid for    \
 
 zinit snippet $ZSH_CONF/history.zsh
 zinit ice wait lucid; zinit snippet $ZSH_CONF/alias.zsh
-zinit ice wait lucid; zinit snippet $ZSH_CONF/functions.zsh
+zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/functions.zsh
 zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/exports.zsh
-zinit ice wait lucid; zinit snippet $ZSH_CONF/eval.zsh
+zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/eval.zsh
 
 zinit ice silent wait=1; zinit light asdf-vm/asdf
 
 zinit ice as"completion" wait=1 lucid
 zinit snippet OMZ::plugins/fd/_fd
 
-zinit ice wait lucid atload"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
+zinit ice wait=1 lucid atload"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
 zinit light unixorn/fzf-zsh-plugin
 
 # NOTE: opens in current window instead of new one
