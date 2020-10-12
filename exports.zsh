@@ -77,7 +77,7 @@ export NODE_REPL_MODE='sloppy';
 export GPG_TTY=$(tty)
 
 # NOTE: brew install vivid (https://github.com/sharkdp/vivid)
-if (( $+commands[vivid] )) export LS_COLORS="$(vivid generate molokai)"
+if (( ${+commands[vivid]} )) export LS_COLORS="$(vivid generate molokai)"
 
 export COMPLETION_WAITING_DOTS=true
 
