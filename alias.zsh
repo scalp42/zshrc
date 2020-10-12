@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+setopt complete_aliases
+
 # NOTE: prefer exa
 # alias ll='ls -lFh --color'
 # alias la='ls -lFha --color'
