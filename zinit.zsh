@@ -42,6 +42,7 @@ zinit light unixorn/fzf-zsh-plugin
 # zinit ice wait lucid; zinit light valentinocossar/sublime
 
 zinit wait=1 lucid for            \
+  Aloxaf/fzf-tab                  \
   OMZP::cp                        \
   OMZP::sublime                   \
   OMZP::encode64                  \
