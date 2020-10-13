@@ -6,6 +6,9 @@ setopt complete_aliases
 # alias ll='ls -lFh --color'
 # alias la='ls -lFha --color'
 
+# NOTE: remove oh-my-zsh directories lib aliases
+unalias l lsa ll la
+
 # NOTE: brew install exa
 alias ls='exa --classify --across --git'
 alias ll='exa --classify --long --binary --group --git'
