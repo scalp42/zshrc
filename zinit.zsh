@@ -78,7 +78,7 @@ zinit ice wait=1 lucid; zinit light hlissner/zsh-autopair
 zinit ice wait lucid atload'
   zstyle ":notify:*" error-title "Failed (in #{time_elapsed} seconds)"
   zstyle ":notify:*" success-title "Done (in #{time_elapsed} seconds)"
-  zstyle ":notify:*" command-complete-timeout 2
+  zstyle ":notify:*" command-complete-timeout 15
   zstyle ":notify:*" enable-on-ssh yes
   zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti"'
 zinit light marzocchi/zsh-notify
