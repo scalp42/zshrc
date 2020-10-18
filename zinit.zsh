@@ -50,6 +50,9 @@ zinit light unixorn/fzf-zsh-plugin
 # NOTE: opens in current window instead of new one
 # zinit ice wait lucid; zinit light valentinocossar/sublime
 
+zinit ice as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" wait=1 lucid
+zinit light tj/git-extras
+
 zinit wait=1 lucid for            \
   Aloxaf/fzf-tab                  \
   OMZP::cp                        \
@@ -58,7 +61,6 @@ zinit wait=1 lucid for            \
   djui/alias-tips                 \
   OMZP::colored-man-pages         \
   OMZP::safe-paste                \
-  tj/git-extras                   \
   OMZP::urltools                  \
   hlissner/zsh-autopair           \
   OMZP::tmux                      \
