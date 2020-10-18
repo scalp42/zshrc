@@ -10,6 +10,15 @@ if [[ ! -f $ZINIT_HOME/bin/zinit.zsh ]]; then
   zcompile $ZINIT_HOME/bin/zinit.zsh
 fi
 
+ZSH_AUTOLOAD=${ZSH_CONF}/autoload
+fpath+="${ZSH_AUTOLOAD}"
+if [[ -d "$ZSH_AUTOLOAD" ]]; then
+    for func in $ZSH_AUTOLOAD/*; do
+        autoload -Uz ${func:t}
+    done
+fi
+unset ZSH_AUTOLOAD
+
 source ~/.zinit/bin/zinit.zsh
 
 zinit ice depth=1 atload"source $ZSH_CONF/.p10k.zsh; _p9k_precmd" nocd wait'!' lucid
