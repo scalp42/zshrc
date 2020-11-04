@@ -49,7 +49,7 @@ setopt BANG_HIST
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-HISTIGNORE="ll:ls:history:[bf]g:exit:pwd:clear:[ \t]*:man *:date:* --help"
+HISTIGNORE="ll:ls:history:[bf]g:exit:pwd:clear:[ \t]*:man *:date:* --help:cd:cd *"
 HISTCONTROL=ignoreboth
 
 HISTFILE=$ZSH_CACHE/.zsh_history
