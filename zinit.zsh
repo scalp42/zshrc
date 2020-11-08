@@ -63,7 +63,6 @@ zinit wait=1 lucid for            \
   OMZP::safe-paste                \
   OMZP::urltools                  \
   hlissner/zsh-autopair           \
-  OMZP::tmux                      \
   ChrisPenner/copy-pasta          \
   peterhurford/git-it-on.zsh      \
   hlissner/zsh-autopair           \
@@ -72,7 +71,6 @@ zinit wait=1 lucid for            \
   rummik/zsh-ing                  \
   robertzk/send.zsh               \
   OMZP::sublime-merge             \
-
 
 # NOTE: https://github.com/zsh-users/zsh-autosuggestions
 # zinit ice wait"1" lucid atload"!_zsh_autosuggest_start"
