@@ -54,7 +54,6 @@ zinit ice wait=1 lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-comp
 zinit light tj/git-extras
 
 zinit wait=1 lucid for            \
-  Aloxaf/fzf-tab                  \
   OMZP::cp                        \
   OMZP::sublime                   \
   OMZP::encode64                  \
@@ -62,10 +61,8 @@ zinit wait=1 lucid for            \
   OMZP::colored-man-pages         \
   OMZP::safe-paste                \
   OMZP::urltools                  \
-  hlissner/zsh-autopair           \
   ChrisPenner/copy-pasta          \
   peterhurford/git-it-on.zsh      \
-  hlissner/zsh-autopair           \
   rtuin/zsh-case                  \
   caarlos0-graveyard/zsh-git-sync \
   rummik/zsh-ing                  \
@@ -80,7 +77,10 @@ zinit wait=1 lucid for            \
 zinit ice pick"h.sh" wait"1" lucid; zinit light paoloantinori/hhighlighter
 
 # NOTE: https://github.com/hlissner/zsh-autopair
-zinit ice wait=1 lucid; zinit light hlissner/zsh-autopair
+zinit ice wait=2 lucid; zinit light hlissner/zsh-autopair
+
+# NOTE: https://github.com/Aloxaf/fzf-tab
+zinit ice wait=2 lucid; zinit light Aloxaf/fzf-tab
 
 # NOTE: https://github.com/marzocchi/zsh-notify
 # NOTE: brew install terminal-notifier
