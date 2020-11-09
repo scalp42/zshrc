@@ -45,20 +45,22 @@ export HOMEBREW_NO_ANALYTICS=1
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 # export PATH="$PATH:$HOME/.rvm/bin"
 
-if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1;
-then
-  export TERM=gnome-256color
-elif infocmp xterm-256color >/dev/null 2>&1; then
-  export TERM=xterm-256color
-fi
+# if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1;
+# then
+#   export TERM=gnome-256color
+# elif infocmp xterm-256color >/dev/null 2>&1; then
+#   export TERM=xterm-256color
+# fi
 
-case "$TERM" in
-  xterm-*color) color_prompt=yes;;
-esac
+# export TERM=xterm-256color
+
+# case "$TERM" in
+#   xterm-*color) color_prompt=yes;;
+# esac
 
 export TLDR_PARAM='yellow'
 
-export AWS_DEFAULT_REGION="us-west-2"
+export AWS_DEFAULT_REGION='us-west-2'
 
 export AWS_PAGER=
 
