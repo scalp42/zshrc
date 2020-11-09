@@ -71,7 +71,7 @@ function timestamp() {
 
 function avg-time() {
     float sum=0
-    integer count=${1:-10}
+    integer count=${1:-50}
     repeat $count { time zsh -ic exit } |& \
         while IFS='' read line; do
       sum+=${${${line% total}##* }//,/.}

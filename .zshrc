@@ -19,6 +19,8 @@ export ZSH_COMPDUMP="${ZSH_CACHE}/.zcompdump-${(%):-%m}-${ZSH_VERSION}"
 source $ZSH_CONF/zinit.zsh
 # source $ZSH_CONF/zgen.zsh
 
+source $ZSH_CONF/ls_colors.zsh
+
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # NOTE: uncomment to profile
