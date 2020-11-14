@@ -17,7 +17,7 @@ alias tree='exa --classify --long --binary --group --tree --git'
 alias lsr='exa --classify --across --git --recurse'
 alias llr='exa --classify --long --binary --group --git --recurse'
 alias lar='exa --classify --long --binary --group --git --all --recurse'
-alias ltr='exa --classify --long --binary --group --git --reverse'
+alias ltr='exa --classify --long --binary --group --git --reverse --sort modified'
 
 alias xi='exit'
 alias htop='sudo htop'
