@@ -69,6 +69,8 @@ zinit wait=1 lucid for            \
   robertzk/send.zsh               \
   OMZP::sublime-merge             \
 
+zinit ice svn wait=1 as=null lucid; zinit snippet PZTM::archive
+
 # NOTE: https://github.com/zsh-users/zsh-autosuggestions
 # zinit ice wait"1" lucid atload"!_zsh_autosuggest_start"
 # zinit light zsh-users/zsh-autosuggestions
