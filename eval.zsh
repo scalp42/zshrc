@@ -11,3 +11,8 @@ fi
 
 # NOTE: https://github.com/gsamokovarov/jump
 eval "$(jump shell)"
+
+# NOTE: https://github.com/trobrock/chefvm
+if [[ -a "$HOME/.chefvm/bin/chefvm" ]]; then
+  eval "$($HOME/.chefvm/bin/chefvm init -)"
+fi
