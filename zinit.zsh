@@ -104,8 +104,8 @@ zinit light marzocchi/zsh-notify
 # zinit light axtl/gpg-agent.zsh
 
 # NOTE: https://github.com/supercrabtree/k
-# zinit ice wait"1" lucid
-# zinit light supercrabtree/k
+zinit ice wait"2" lucid
+zinit light supercrabtree/k
 
 # NOTE: https://github.com/mdumitru/last-working-dir
 zinit light mdumitru/last-working-dir

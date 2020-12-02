@@ -10,7 +10,6 @@ setopt complete_aliases
 unalias l lsa ll la
 
 # NOTE: brew install exa
-alias ls='exa --classify --across --git'
 alias ll='exa --classify --long --binary --group --git'
 alias la='exa --classify --long --binary --group --git --all'
 alias tree='exa --classify --long --binary --group --tree --git'
