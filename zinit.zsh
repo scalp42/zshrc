@@ -91,7 +91,7 @@ zinit ice wait lucid atload'
   zstyle ":notify:*" success-title "Done (in #{time_elapsed} seconds)"
   zstyle ":notify:*" command-complete-timeout 15
   zstyle ":notify:*" enable-on-ssh yes
-  zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti|ag"'
+  zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti|ag|nano"'
 zinit light marzocchi/zsh-notify
 
 # zinit ice wait lucid atload"
