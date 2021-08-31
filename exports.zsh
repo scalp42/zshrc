@@ -104,3 +104,5 @@ export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
   source "$ZSH_CONF/secrets/exports.zsh"
 fi
+
+export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
