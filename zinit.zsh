@@ -21,11 +21,11 @@ unset ZSH_AUTOLOAD
 
 source ~/.zinit/bin/zinit.zsh
 
-zinit ice depth=1 atload"source $ZSH_CONF/.p10k.zsh; _p9k_precmd" nocd wait'!' lucid
+# zinit ice depth=1 atload"source $ZSH_CONF/.p10k.zsh; _p9k_precmd" nocd wait'!' lucid
 # NOTE: my fork turns off the warning about instant prompt
-# zinit light romkatv/powerlevel10k
-# zinit snippet $ZSH_CONF/.p10k.zsh
-zinit light scalp42/powerlevel10k
+zinit light romkatv/powerlevel10k
+zinit snippet $ZSH_CONF/.p10k.zsh
+# zinit light scalp42/powerlevel10k
 
 zinit wait lucid for    \
   OMZL::directories.zsh \
