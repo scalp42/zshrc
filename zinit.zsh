@@ -41,8 +41,9 @@ zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/eval.zsh
 
 zinit ice silent wait=1; zinit light asdf-vm/asdf
 
-zinit ice as"completion" wait=1 lucid
-zinit snippet OMZ::plugins/fd/_fd
+# NOTE: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/fd
+# zinit ice as"completion" wait=1 lucid
+# zinit snippet OMZ::plugins/fd/_fd
 
 zinit ice wait=1 lucid atload"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
 zinit light unixorn/fzf-zsh-plugin
@@ -69,7 +70,9 @@ zinit wait=1 lucid for            \
   robertzk/send.zsh               \
   OMZP::sublime-merge             \
 
-zinit ice svn wait=1 as=null lucid; zinit snippet PZTM::archive
+# NOTE: see https://github.com/zdharma/zinit/issues/421 but preferring https://theunarchiver.com/command-line
+# NOTE: brew install unar instead
+# zinit ice svn wait=1 as=null lucid; zinit snippet PZTM::archive
 
 # NOTE: https://github.com/zsh-users/zsh-autosuggestions
 # zinit ice wait"1" lucid atload"!_zsh_autosuggest_start"
