@@ -96,7 +96,7 @@ if ! zgen saved; then
   zgen load robertzk/send.zsh
 
   # NOTE: load last
-  zgen load zdharma/fast-syntax-highlighting
+  zgen load zdharma-continuum/fast-syntax-highlighting
 
   zgen save
 fi

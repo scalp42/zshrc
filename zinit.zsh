@@ -6,7 +6,7 @@ declare -A ZINIT
 ZINIT[OPTIMIZE_OUT_DISK_ACCESSES]=1
 
 if [[ ! -f $ZINIT_HOME/bin/zinit.zsh ]]; then
-  git clone https://github.com/zdharma/zinit $ZINIT_HOME/bin
+  git clone https://github.com/zdharma-continuum/zinit $ZINIT_HOME/bin
   zcompile $ZINIT_HOME/bin/zinit.zsh
 fi
 
@@ -36,7 +36,7 @@ zinit wait lucid for    \
 zinit snippet $ZSH_CONF/history.zsh
 zinit ice wait lucid; zinit snippet $ZSH_CONF/alias.zsh
 zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/functions.zsh
-zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/exports.zsh
+zinit ice lucid; zinit snippet $ZSH_CONF/exports.zsh
 zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/eval.zsh
 
 zinit ice silent wait=1; zinit light asdf-vm/asdf
@@ -70,7 +70,7 @@ zinit wait=1 lucid for            \
   robertzk/send.zsh               \
   OMZP::sublime-merge             \
 
-# NOTE: see https://github.com/zdharma/zinit/issues/421 but preferring https://theunarchiver.com/command-line
+# NOTE: see https://github.com/zdharma-continuum/zinit/issues/421 but preferring https://theunarchiver.com/command-line
 # NOTE: brew install unar instead
 # zinit ice svn wait=1 as=null lucid; zinit snippet PZTM::archive
 
@@ -115,4 +115,4 @@ zinit light mdumitru/last-working-dir
 
 # NOTE: load last
 zinit ice wait silent nocompletions lucid atinit"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
-zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting

@@ -10,6 +10,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# export PATH=/usr/local/opt/coreutils/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/sbin:/Applications/Google\ Chrome.app/Contents/MacOS:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+# export PATH=$HOME/go/bin:$PATH
+
 export ZSH_CONF=$HOME/.zsh
 export ZSH_CACHE=$ZSH_CONF/cache
 export ZSH_CACHE_DIR=$ZSH_CACHE
