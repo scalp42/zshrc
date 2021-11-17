@@ -45,8 +45,8 @@ zinit ice silent wait=1; zinit light asdf-vm/asdf
 # zinit ice as"completion" wait=1 lucid
 # zinit snippet OMZ::plugins/fd/_fd
 
-zinit ice wait=1 lucid atload"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
 zinit light unixorn/fzf-zsh-plugin
+zinit ice wait=1 lucid atload"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
 
 # NOTE: opens in current window instead of new one
 # zinit ice wait lucid; zinit light valentinocossar/sublime
@@ -115,4 +115,6 @@ zinit light mdumitru/last-working-dir
 
 # NOTE: load last
 zinit ice wait silent nocompletions lucid atinit"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
+
+zinit ice wait=1 lucid
 zinit light zdharma-continuum/fast-syntax-highlighting
