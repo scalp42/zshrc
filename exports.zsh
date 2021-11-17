@@ -81,7 +81,8 @@ export NODE_REPL_MODE='sloppy';
 # NOTE: brew install vivid (https://github.com/sharkdp/vivid)
 # if (( ${+commands[vivid]} )) export LS_COLORS="$(vivid generate molokai)"
 
-export COMPLETION_WAITING_DOTS=true
+# BUG: broken, see https://github.com/ohmyzsh/ohmyzsh/issues/6226#issuecomment-321682739
+# export COMPLETION_WAITING_DOTS=true
 
 # NOTE: https://github.com/unixorn/autoupdate-zgen
 export ZGEN_PLUGIN_UPDATE_DAYS=7
