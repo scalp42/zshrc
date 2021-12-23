@@ -107,3 +107,4 @@ if [[ -a "$ZSH_CONF/secrets/exports.zsh" ]]; then
 fi
 
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+export ASDF_HASHICORP_OVERWRITE_ARCH='amd64'
