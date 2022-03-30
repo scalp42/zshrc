@@ -20,7 +20,18 @@ export LANG="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
 
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/sbin:/Applications/Google\ Chrome.app/Contents/MacOS:$PATH
-export PATH=$HOME/go/bin:$PATH
+
+if [[ -a "${HOME}/go/bin" ]]; then
+export PATH="${PATH}:${HOME}/go/bin"
+fi
+
+if [[ -a "${HOME}/.cargo/bin" ]]; then
+export PATH="${PATH}:${HOME}/.cargo/bin"
+fi
+
+if [[ -a "${HOME}/.krew/bin" ]]; then
+export PATH="${PATH}:${HOME}/.krew/bin"
+fi
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER="less -X"
