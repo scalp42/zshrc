@@ -63,7 +63,6 @@ zinit wait=1 lucid for            \
   OMZP::safe-paste                \
   OMZP::urltools                  \
   ChrisPenner/copy-pasta          \
-  peterhurford/git-it-on.zsh      \
   rtuin/zsh-case                  \
   caarlos0-graveyard/zsh-git-sync \
   rummik/zsh-ing                  \
@@ -83,9 +82,6 @@ zinit ice pick"h.sh" wait"1" lucid; zinit light paoloantinori/hhighlighter
 
 # NOTE: https://github.com/hlissner/zsh-autopair
 zinit ice wait=2 lucid; zinit light hlissner/zsh-autopair
-
-# NOTE: https://github.com/Aloxaf/fzf-tab
-zinit ice wait=2 lucid; zinit light Aloxaf/fzf-tab
 
 # NOTE: https://github.com/marzocchi/zsh-notify
 # NOTE: brew install terminal-notifier
@@ -118,3 +114,6 @@ zinit ice wait silent nocompletions lucid atinit"autoload -Uz compinit && compin
 
 zinit ice wait=1 lucid
 zinit light zdharma-continuum/fast-syntax-highlighting
+
+# NOTE: https://github.com/Aloxaf/fzf-tab
+zinit ice wait=2 lucid; zinit light Aloxaf/fzf-tab
