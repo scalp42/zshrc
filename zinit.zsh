@@ -117,3 +117,6 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 
 # NOTE: https://github.com/Aloxaf/fzf-tab
 zinit ice wait=2 lucid; zinit light Aloxaf/fzf-tab
+
+# NOTE: will reset bindkeys if needed
+# bindkey -d
