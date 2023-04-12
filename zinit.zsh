@@ -56,7 +56,6 @@ zinit light tj/git-extras
 
 zinit wait=1 lucid for            \
   OMZP::cp                        \
-  OMZP::sublime                   \
   OMZP::encode64                  \
   djui/alias-tips                 \
   OMZP::colored-man-pages         \
@@ -68,6 +67,9 @@ zinit wait=1 lucid for            \
   rummik/zsh-ing                  \
   robertzk/send.zsh               \
   OMZP::sublime-merge             \
+  OMZL::functions.zsh							\
+
+# zinit wait=1 lucid for OMZP::sublime
 
 # NOTE: see https://github.com/zdharma-continuum/zinit/issues/421 but preferring https://theunarchiver.com/command-line
 # NOTE: brew install unar instead

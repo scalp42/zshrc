@@ -33,7 +33,7 @@ if ! zgen saved; then
 
   # NOTE: opens in current window instead of new one
   # zgen load valentinocossar/sublime
-  zgen oh-my-zsh plugins/sublime
+  # zgen oh-my-zsh plugins/sublime
 
   zgen oh-my-zsh plugins/fd
   zgen oh-my-zsh plugins/encode64
