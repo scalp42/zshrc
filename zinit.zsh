@@ -56,6 +56,7 @@ zinit light tj/git-extras
 
 zinit wait=1 lucid for            \
   OMZP::cp                        \
+  OMZL::functions.zsh             \
   OMZP::encode64                  \
   djui/alias-tips                 \
   OMZP::colored-man-pages         \
@@ -67,7 +68,6 @@ zinit wait=1 lucid for            \
   rummik/zsh-ing                  \
   robertzk/send.zsh               \
   OMZP::sublime-merge             \
-  OMZL::functions.zsh							\
 
 # zinit wait=1 lucid for OMZP::sublime
 
