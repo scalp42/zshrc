@@ -27,6 +27,8 @@ zinit light romkatv/powerlevel10k
 zinit snippet $ZSH_CONF/.p10k.zsh
 # zinit light scalp42/powerlevel10k
 
+# zinit snippet OMZP::urltools
+
 zinit wait lucid for    \
   OMZL::directories.zsh \
   OMZL::completion.zsh  \
@@ -61,7 +63,6 @@ zinit wait=1 lucid for            \
   djui/alias-tips                 \
   OMZP::colored-man-pages         \
   OMZP::safe-paste                \
-  OMZP::urltools                  \
   ChrisPenner/copy-pasta          \
   rtuin/zsh-case                  \
   caarlos0-graveyard/zsh-git-sync \
