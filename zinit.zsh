@@ -23,7 +23,7 @@ source ~/.zinit/bin/zinit.zsh
 
 # zinit ice depth=1 atload"source $ZSH_CONF/.p10k.zsh; _p9k_precmd" nocd wait'!' lucid
 # NOTE: my fork turns off the warning about instant prompt
-zinit light romkatv/powerlevel10k
+zinit ice depth"1"; zinit light romkatv/powerlevel10k
 zinit snippet $ZSH_CONF/.p10k.zsh
 # zinit light scalp42/powerlevel10k
 
@@ -93,7 +93,7 @@ zinit ice wait lucid atload'
   zstyle ":notify:*" success-title "Done (in #{time_elapsed} seconds)"
   zstyle ":notify:*" command-complete-timeout 15
   zstyle ":notify:*" enable-on-ssh yes
-  zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti|ag|nano"'
+  zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti|ag|nano|watch"'
 zinit light marzocchi/zsh-notify
 
 # zinit ice wait lucid atload"

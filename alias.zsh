@@ -45,7 +45,7 @@ alias cat='bat -pP'
 alias sssh='ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=999'
 alias week='date +%V'
 alias path='echo -e ${PATH//:/\\n}'
-alias stt='subl -a .'
+alias stt='subl .'
 alias sttt='subl -a .'
 
 # NOTE: https://github.com/kaelzhang/shell-safe-rm
