@@ -16,3 +16,7 @@ eval "$(jump shell)"
 if [[ -a "$HOME/.chefvm/bin/chefvm" ]]; then
   eval "$($HOME/.chefvm/bin/chefvm init -)"
 fi
+
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
