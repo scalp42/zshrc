@@ -10,13 +10,13 @@ setopt complete_aliases
 unalias l lsa ll la
 
 # NOTE: brew install exa
-alias ll='exa --classify --long --binary --group --git'
-alias la='exa --classify --long --binary --group --git --all'
-alias tree='exa --classify --long --binary --group --tree --git'
-alias lsr='exa --classify --across --git --recurse'
-alias llr='exa --classify --long --binary --group --git --recurse'
-alias lar='exa --classify --long --binary --group --git --all --recurse'
-alias ltr='exa --classify --long --binary --group --git --reverse --sort modified'
+alias ll='eza --classify --long --binary --group --git'
+alias la='eza --classify --long --binary --group --git --all'
+alias tree='eza --classify --long --binary --group --tree --git'
+alias lsr='eza --classify --across --git --recurse'
+alias llr='eza --classify --long --binary --group --git --recurse'
+alias lar='eza --classify --long --binary --group --git --all --recurse'
+alias ltr='eza --classify --long --binary --group --git --reverse --sort modified'
 
 alias xi='exit'
 alias htop='sudo htop'
