@@ -36,6 +36,7 @@ alias killosx='echo "Kill affected applications" ; for app in Safari Finder Dock
 alias stoptime='sudo tmutil disablelocal'
 alias starttime='sudo tmutil enablelocal'
 alias gti=git
+alias gi=git
 alias ogc='open -a Google\ Chrome --args --disable-web-security'
 alias pipu='pip3 freeze | xargs pip install --upgrade'
 alias rmv='rvm use 2.7.1 --install --create'
