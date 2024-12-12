@@ -1,0 +1,59 @@
+# NOTE: https://starship.rs/config
+# ln -s ~/.zsh/starship.toml ~/.config/starship.toml
+
+add_newline = false
+format = "$time$all$kubernetes$line_break$character"
+command_timeout = 1000
+
+[aws]
+# disabled = true
+symbol = '󰸏 '
+
+[python]
+symbol = '󰌠 '
+
+[golang]
+symbol = '󰟓 '
+
+[ruby]
+symbol = '󰴭 '
+
+[time]
+disabled = false
+format = "[$time]($style) | "
+
+[terraform]
+format = 'via [$symbol($version )]($style) '
+symbol = '󱁢 '
+
+[character]
+# success_symbol = '[➜](bold green) '
+# error_symbol = '[➜](bold red) '
+error_symbol = '󰯆 '
+
+[kubernetes]
+format = '[$symbol $context(\($namespace\))]($style) '
+detect_files = ['kustomization.yaml']
+symbol = '󱃾 '
+contexts = [
+  { context_pattern = ".*dev.*", style = "green"}, #, symbol = "⬢ " },
+  { context_pattern = ".*prod.*", style = "red"} #, symbol = "⬢ " },
+]
+
+[git_branch]
+symbol = '󰊤 '
+
+[git_commit]
+tag_symbol = '󰓹 '
+only_detached = false
+tag_disabled = false
+
+[package]
+disabled = true
+
+[directory]
+truncate_to_repo = false
+
+[nodejs]
+detect_extensions = []
+symbol = '󰎙 '

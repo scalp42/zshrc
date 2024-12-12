@@ -23,11 +23,16 @@ source ~/.zinit/bin/zinit.zsh
 
 # zinit ice depth=1 atload"source $ZSH_CONF/.p10k.zsh; _p9k_precmd" nocd wait'!' lucid
 # NOTE: my fork turns off the warning about instant prompt
-zinit ice depth"1"; zinit light romkatv/powerlevel10k
-zinit snippet $ZSH_CONF/.p10k.zsh
+#zinit ice depth"1"; zinit light romkatv/powerlevel10k
+#zinit snippet $ZSH_CONF/.p10k.zsh
 # zinit light scalp42/powerlevel10k
 
 # zinit snippet OMZP::urltools
+
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
 
 zinit wait lucid for    \
   OMZL::directories.zsh \
@@ -69,6 +74,8 @@ zinit wait=1 lucid for            \
   rummik/zsh-ing                  \
   robertzk/send.zsh               \
   OMZP::sublime-merge             \
+  blockf atpull'zinit creinstall -q .' \
+    zsh-users/zsh-completions
 
 # zinit wait=1 lucid for OMZP::sublime
 
@@ -110,10 +117,7 @@ zinit ice wait"2" lucid
 zinit light supercrabtree/k
 
 # NOTE: https://github.com/mdumitru/last-working-dir
-zinit light mdumitru/last-working-dir
-
-# NOTE: load last
-zinit ice wait silent nocompletions lucid atinit"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
+# zinit light mdumitru/last-working-dir
 
 zinit ice wait=1 lucid
 zinit light zdharma-continuum/fast-syntax-highlighting
@@ -123,3 +127,7 @@ zinit ice wait=2 lucid; zinit light Aloxaf/fzf-tab
 
 # NOTE: will reset bindkeys if needed
 # bindkey -d
+
+# NOTE: load last
+zinit ice wait silent nocompletions lucid atinit"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
+

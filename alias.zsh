@@ -49,6 +49,10 @@ alias path='echo -e ${PATH//:/\\n}'
 alias stt='subl .'
 alias sttt='subl -a .'
 
+# if [[ -a "/opt/homebrew/bin/grealpath" ]]; then
+#   alias realpath='grealpath'
+# fi
+
 # NOTE: https://github.com/kaelzhang/shell-safe-rm
 alias rm='safe-rm'
 
