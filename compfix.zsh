@@ -1,4 +1,6 @@
 # NOTE: https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/compfix.zsh
+# Not needed unless you have `compaudit` issues (which can be fixed with `compaudit | xargs chmod g-w,o-w`)
+#
 # Handle completions insecurities (i.e., completion-dependent directories with
 # insecure ownership or permissions) by:
 #
