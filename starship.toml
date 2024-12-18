@@ -1,9 +1,11 @@
 # NOTE: https://starship.rs/config
 # ln -s ~/.zsh/starship.toml ~/.config/starship.toml
 
-add_newline = false
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
 format = "$time$all$kubernetes$line_break$character"
-command_timeout = 1000
+command_timeout = 2000
 
 [aws]
 # disabled = true
@@ -25,11 +27,12 @@ format = "[$time]($style) | "
 [terraform]
 format = 'via [$symbol($version )]($style) '
 symbol = '󱁢 '
+detect_files = ['.tf']
 
 [character]
 # success_symbol = '[➜](bold green) '
 # error_symbol = '[➜](bold red) '
-error_symbol = '󰯆 '
+# error_symbol = '󰯆 '
 
 [kubernetes]
 format = '[$symbol $context(\($namespace\))]($style) '
@@ -44,7 +47,7 @@ contexts = [
 symbol = '󰊤 '
 
 [git_commit]
-tag_symbol = '󰓹 '
+tag_symbol = ' 󰓹 '
 only_detached = false
 tag_disabled = false
 
@@ -53,7 +56,13 @@ disabled = true
 
 [directory]
 truncate_to_repo = false
+truncation_length = 6
+read_only = ' 🔒'
 
 [nodejs]
 detect_extensions = []
 symbol = '󰎙 '
+
+# TODO: not working
+[hostname]
+aliases = { "NL-GKWV0JNX2X" = "PTI" }

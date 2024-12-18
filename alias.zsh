@@ -1,15 +1,10 @@
-#!/usr/bin/env zsh
-
+# NOTE: enable command-line completion for aliases
 setopt complete_aliases
 
-# NOTE: prefer exa
-# alias ll='ls -lFh --color'
-# alias la='ls -lFha --color'
-
 # NOTE: remove oh-my-zsh directories lib aliases
-unalias l lsa ll la
+unalias l lsa ll la 2>/dev/null
 
-# NOTE: brew install exa
+# NOTE: brew install eza
 alias ll='eza --classify --long --binary --group --git'
 alias la='eza --classify --long --binary --group --git --all'
 alias tree='eza --classify --long --binary --group --tree --git'
@@ -17,6 +12,7 @@ alias lsr='eza --classify --across --git --recurse'
 alias llr='eza --classify --long --binary --group --git --recurse'
 alias lar='eza --classify --long --binary --group --git --all --recurse'
 alias ltr='eza --classify --long --binary --group --git --reverse --sort modified'
+alias ltra='eza --classify --long --binary --group --git --reverse --sort modified --all'
 
 alias xi='exit'
 alias htop='sudo htop'
@@ -40,7 +36,6 @@ alias gi=git
 alias ogc='open -a Google\ Chrome --args --disable-web-security'
 alias pipu='pip3 freeze | xargs pip install --upgrade'
 alias rmv='rvm use 2.7.1 --install --create'
-alias chefdk='eval "$(chef shell-init $PYENV_SHELL)"'
 alias dockerinit='eval "$(docker-machine env default)"; export DOCKER_IP=$(docker-machine ip default)'
 alias cat='bat -pP'
 alias sssh='ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=999'
@@ -48,10 +43,6 @@ alias week='date +%V'
 alias path='echo -e ${PATH//:/\\n}'
 alias stt='subl .'
 alias sttt='subl -a .'
-
-# if [[ -a "/opt/homebrew/bin/grealpath" ]]; then
-#   alias realpath='grealpath'
-# fi
 
 # NOTE: https://github.com/kaelzhang/shell-safe-rm
 alias rm='safe-rm'
@@ -65,6 +56,10 @@ if (( ${+commands[unpigz]} )) alias gunzip='unpigz'
 alias zupdate='zi update -r --all -p 20'
 alias zclean='zi delete --clean'
 
-if [[ -a "$ZSH_CONF/secrets/alias.zsh" ]]; then
-  source "$ZSH_CONF/secrets/alias.zsh"
+alias nnao="nano "
+
+alias backup_zsh='backup_zsh_function'
+
+if [[ -a "$ZSH_HOME/secrets/alias.zsh" ]]; then
+  source "$ZSH_HOME/secrets/alias.zsh"
 fi

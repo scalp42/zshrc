@@ -1,81 +1,69 @@
-#!/usr/bin/env zsh
 # NOTE: source is https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
 
-# fixme - the load process here seems a bit bizarre
-zmodload -i zsh/complist
+# NOTE: load zsh's completion list module (necessary for certain completion features)
+# zmodload -i zsh/complist
 
+# NOTE: adjust completion word boundaries
 WORDCHARS=''
 
-unsetopt menu_complete   # do not autoselect the first completion entry
-unsetopt flowcontrol
-setopt auto_menu         # show completion menu on successive tab press
-setopt complete_in_word
-setopt always_to_end
+# NOTE: completion-related options
+unsetopt menu_complete          # NOTE: do not autoselect the first completion entry
+unsetopt flowcontrol            # NOTE: disable flow control (Ctrl+S/Ctrl+Q)
+setopt auto_menu                # NOTE: show completion menu on successive tab press
+setopt complete_in_word         # NOTE: allow completion within a word
+setopt always_to_end            # NOTE: always move the cursor to the end after completion
 
-# should this be in keybindings?
-bindkey -M menuselect '^o' accept-and-infer-next-history
+# # NOTE: configure matcher-list based on case sensitivity and hyphen insensitivity
+# if [[ "$CASE_SENSITIVE" = true ]]; then
+#   matcher_list=('r:|=*' 'l:|=* r:|=*')
+# elif [[ "$HYPHEN_INSENSITIVE" = true ]]; then
+#   matcher_list=('m:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*')
+# else
+#   matcher_list=('m:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*')
+# fi
+# unset CASE_SENSITIVE HYPHEN_INSENSITIVE
+
+# # NOTE: set the matcher list for completions
+# zstyle ':completion:*' matcher-list "${matcher_list[@]}"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# NOTE: set additional completion styles
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$ZSH_CACHE"
+
+# NOTE: enable interactive menu selection for all completion contexts
 zstyle ':completion:*:*:*:*:*' menu select
 
-# case insensitive (all), partial-word and substring completion
-if [[ "$CASE_SENSITIVE" = true ]]; then
-  zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
-else
-  if [[ "$HYPHEN_INSENSITIVE" = true ]]; then
-    zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
-  else
-    zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
-  fi
-fi
-unset CASE_SENSITIVE HYPHEN_INSENSITIVE
-
-# Complete . and .. special directories
-zstyle ':completion:*' special-dirs true
-
-zstyle ':completion:*' list-colors ''
+# NOTE: customize color settings for kill/process completions
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
-if [[ "$OSTYPE" = solaris* ]]; then
-  zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm"
+# NOTE: define the command used to list processes for completions
+if [[ "$OSTYPE" = darwin* ]]; then
+  zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm"
 else
-  zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm -w -w"
+  zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 fi
 
-# disable named-directories autocompletion
+# NOTE: control the order of directory completions
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
 
-# Use caching so that commands like apt and dpkg complete are useable
-zstyle ':completion:*' use-cache yes
-zstyle ':completion:*' cache-path $ZSH_CACHE_DIR
-
-# Don't complete uninteresting users
+# NOTE: ignore "system" users during user completions
 zstyle ':completion:*:*:*:users' ignored-patterns \
-        adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
-        clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
-        gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
-        ldap lp mail mailman mailnull man messagebus  mldonkey mysql nagios \
-        named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
-        operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
-        rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
-        usbmux uucp vcsa wwwrun xfs '_*'
+      adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
+      clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
+      gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
+      ldap lp mail mailman mailnull man messagebus mldonkey mysql nagios \
+      named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
+      operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
+      rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
+      _spotlight _windowserver _appleevents _eppc _cms _calendar \
+      _xserverdocs _mdnsresponder _dpaudio _postfix _atsserver \
+      _timezone _lp _postfix _softwareupdate \
+      usbmux uucp vcsa wwwrun xfs '_*'
 
-# ... unless we really want to.
+# NOTE: display single ignored pattern at a time in completions
 zstyle '*' single-ignored show
 
-if [[ ${COMPLETION_WAITING_DOTS:-false} != false ]]; then
-  expand-or-complete-with-dots() {
-    # use $COMPLETION_WAITING_DOTS either as toggle or as the sequence to show
-    [[ $COMPLETION_WAITING_DOTS = true ]] && COMPLETION_WAITING_DOTS="%F{red}…%f"
-    # turn off line wrapping and print prompt-expanded "dot" sequence
-    printf '\e[?7l%s\e[?7h' "${(%)COMPLETION_WAITING_DOTS}"
-    zle expand-or-complete
-    zle redisplay
-  }
-  zle -N expand-or-complete-with-dots
-  # Set the function as the default tab completion widget
-  bindkey -M emacs "^I" expand-or-complete-with-dots
-  bindkey -M viins "^I" expand-or-complete-with-dots
-  bindkey -M vicmd "^I" expand-or-complete-with-dots
-fi
-
-# automatically load bash completion functions
-autoload -U +X bashcompinit && bashcompinit
+# NOTE: load bash completions if needed (currently commented out for performance)
+# autoload -U +X bashcompinit && bashcompinit
