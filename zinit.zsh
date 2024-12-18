@@ -12,6 +12,16 @@ zinit load asdf-vm/asdf
 
 zinit ice turbo'2' wait lucid; zinit load ChrisPenner/copy-pasta
 
+# NOTE: https://github.com/marzocchi/zsh-notify
+# NOTE: brew install terminal-notifier
+zinit ice wait'2' lucid atload'
+  zstyle ":notify:*" error-title "Failed (in #{time_elapsed} seconds)"
+  zstyle ":notify:*" success-title "Done (in #{time_elapsed} seconds)"
+  zstyle ":notify:*" command-complete-timeout 15
+  zstyle ":notify:*" enable-on-ssh yes
+  zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti|ag|nano|watch"'
+zinit light marzocchi/zsh-notify
+
 # NOTE: speed up completion-related plugin loading by precompiling and blocking functions redefinitions
 zinit ice blockf compile lucid; zinit load zsh-users/zsh-completions
 
