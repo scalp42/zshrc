@@ -5,7 +5,13 @@ zinit snippet $ZSH_HOME/alias.zsh
 zinit snippet $ZSH_HOME/functions.zsh
 zinit snippet $ZSH_HOME/eval.zsh
 zinit ice compile wait blockf silent; zinit snippet $ZSH_HOME/directories.zsh
-zinit ice compile blockf silent; zinit snippet $ZSH_HOME/completions.zsh
+
+# TODO: optimize as it's slow
+# zinit ice compile blockf silent; zinit snippet $ZSH_HOME/completions.zsh
+# zinit ice blockf silent; zinit snippet $ZSH_HOME/completions.zsh
+
+# TODO: optimize more if possible
+zinit ice wait'2' lucid; zinit snippet $ZSH_HOME/fuck.zsh
 
 # NOTE: load plugins that don't depend on completion first
 zinit load asdf-vm/asdf

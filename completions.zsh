@@ -13,22 +13,24 @@ setopt auto_menu                # NOTE: show completion menu on successive tab p
 setopt complete_in_word         # NOTE: allow completion within a word
 setopt always_to_end            # NOTE: always move the cursor to the end after completion
 
-# NOTE: configure matcher-list based on case sensitivity and hyphen insensitivity
-if [[ "$CASE_SENSITIVE" = true ]]; then
-  matcher_list=('r:|=*' 'l:|=* r:|=*')
-elif [[ "$HYPHEN_INSENSITIVE" = true ]]; then
-  matcher_list=('m:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*')
-else
-  matcher_list=('m:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*')
-fi
-unset CASE_SENSITIVE HYPHEN_INSENSITIVE
+# # NOTE: configure matcher-list based on case sensitivity and hyphen insensitivity
+# if [[ "$CASE_SENSITIVE" = true ]]; then
+#   matcher_list=('r:|=*' 'l:|=* r:|=*')
+# elif [[ "$HYPHEN_INSENSITIVE" = true ]]; then
+#   matcher_list=('m:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*')
+# else
+#   matcher_list=('m:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*')
+# fi
+# unset CASE_SENSITIVE HYPHEN_INSENSITIVE
 
-# NOTE: set various completion styles for :completion:* context
-zstyle ':completion:*' matcher-list $matcher_list \
-                        special-dirs true \
-                        list-colors '' \
-                        use-cache yes \
-                        cache-path $ZSH_CACHE
+# # NOTE: set the matcher list for completions
+# zstyle ':completion:*' matcher-list "${matcher_list[@]}"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# NOTE: set additional completion styles
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$ZSH_CACHE"
 
 # NOTE: enable interactive menu selection for all completion contexts
 zstyle ':completion:*:*:*:*:*' menu select
@@ -37,10 +39,10 @@ zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
 # NOTE: define the command used to list processes for completions
-if [[ "$OSTYPE" = solaris* ]]; then
-  zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm"
+if [[ "$OSTYPE" = darwin* ]]; then
+  zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm"
 else
-  zstyle ':completion:*:*:*:*:processes' command "ps -u $USERNAME -o pid,user,comm -w -w"
+  zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 fi
 
 # NOTE: control the order of directory completions
@@ -55,25 +57,13 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
       named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
       operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
       rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
+      _spotlight _windowserver _appleevents _eppc _cms _calendar \
+      _xserverdocs _mdnsresponder _dpaudio _postfix _atsserver \
+      _timezone _lp _postfix _softwareupdate \
       usbmux uucp vcsa wwwrun xfs '_*'
 
 # NOTE: display single ignored pattern at a time in completions
 zstyle '*' single-ignored show
-
-# NOTE: handle completion waiting dots if enabled
-if [[ ${COMPLETION_WAITING_DOTS:-false} != false ]]; then
-  expand-or-complete-with-dots() {
-    # NOTE: use $COMPLETION_WAITING_DOTS either as toggle or as the sequence to show
-    [[ $COMPLETION_WAITING_DOTS = true ]] && COMPLETION_WAITING_DOTS="%F{red}…%f"
-    # NOTE: turn off line wrapping and print prompt-expanded "dot" sequence
-    printf '\e[?7l%s\e[?7h' "${(%)COMPLETION_WAITING_DOTS}"
-    zle expand-or-complete
-    zle redisplay
-  }
-  zle -N expand-or-complete-with-dots
-  # NOTE: set the function as the default tab completion widget
-  bindkey "^I" expand-or-complete-with-dots
-fi
 
 # NOTE: load bash completions if needed (currently commented out for performance)
 # autoload -U +X bashcompinit && bashcompinit
