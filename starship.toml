@@ -1,6 +1,8 @@
 # NOTE: https://starship.rs/config
 # ln -s ~/.zsh/starship.toml ~/.config/starship.toml
 
+"$schema" = 'https://starship.rs/config-schema.json'
+
 add_newline = false
 format = "$time$all$kubernetes$line_break$character"
 command_timeout = 1000
@@ -25,11 +27,12 @@ format = "[$time]($style) | "
 [terraform]
 format = 'via [$symbol($version )]($style) '
 symbol = '󱁢 '
+detect_files = ['.tf']
 
 [character]
 # success_symbol = '[➜](bold green) '
 # error_symbol = '[➜](bold red) '
-error_symbol = '󰯆 '
+# error_symbol = '󰯆 '
 
 [kubernetes]
 format = '[$symbol $context(\($namespace\))]($style) '
@@ -53,7 +56,13 @@ disabled = true
 
 [directory]
 truncate_to_repo = false
+truncation_length = 6
+read_only = ' 🔒'
 
 [nodejs]
 detect_extensions = []
 symbol = '󰎙 '
+
+# TODO: not working
+[hostname]
+aliases = { "NL-GKWV0JNX2X" = "PTI" }

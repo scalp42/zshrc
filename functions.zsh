@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 function greph () {
   history | grep $1
 }
@@ -80,3 +78,21 @@ function avg-time() {
 }
 
 if (( ${+commands[jump]} )) jc() { j "$(basename $PWD)/*/$@" }
+
+# NOTE: helper function to handle .zsh -> .zwc compilation and sourcing
+compile_and_source() {
+  local src="$1"
+  local compiled="${src:r}.zwc"  # change .zsh to .zwc
+
+  # NOTE: only compile if source is newer than compiled or compiled doesn't exist
+  if [[ -f "$src" && ( ! -f "$compiled" || "$src" -nt "$compiled" ) ]]; then
+    zcompile "$src"
+  fi
+
+  # NOTE: if compiled exists, source it; otherwise source the plain file
+  if [[ -f "$compiled" ]]; then
+    source "$compiled"
+  else
+    [[ -f "$src" ]] && source "$src"
+  fi
+}
