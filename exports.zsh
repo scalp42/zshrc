@@ -32,6 +32,7 @@ path=(
   /opt/local/bin
   /usr/local/sbin
   "/Applications/Google Chrome.app/Contents/MacOS"
+  "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
   $path
 )
 
