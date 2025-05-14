@@ -1,101 +1,27 @@
 #!/usr/bin/env zsh
 
-PS1=
-ZINIT_HOME=~/.zinit
-declare -A ZINIT
-ZINIT[OPTIMIZE_OUT_DISK_ACCESSES]=1
+zinit snippet $ZSH_HOME/history.zsh
+zinit snippet $ZSH_HOME/alias.zsh
+zinit snippet $ZSH_HOME/functions.zsh
+zinit snippet $ZSH_HOME/eval.zsh
+zinit ice compile wait blockf silent; zinit snippet $ZSH_HOME/directories.zsh
 
-if [[ ! -f $ZINIT_HOME/bin/zinit.zsh ]]; then
-  git clone https://github.com/zdharma-continuum/zinit $ZINIT_HOME/bin
-  zcompile $ZINIT_HOME/bin/zinit.zsh
-fi
+# TODO: optimize as it's slow
+# zinit ice compile blockf silent; zinit snippet $ZSH_HOME/completions.zsh
+# zinit ice blockf silent; zinit snippet $ZSH_HOME/completions.zsh
 
-ZSH_AUTOLOAD=${ZSH_CONF}/autoload
-fpath+="${ZSH_AUTOLOAD}"
-if [[ -d "$ZSH_AUTOLOAD" ]]; then
-    for func in $ZSH_AUTOLOAD/*; do
-        autoload -Uz ${func:t}
-    done
-fi
-unset ZSH_AUTOLOAD
+# TODO: optimize more if possible
+zinit ice wait'2' lucid; zinit snippet $ZSH_HOME/fuck.zsh
 
-source ~/.zinit/bin/zinit.zsh
+# NOTE: load plugins that don't depend on completion first
+# TODO: busted with asdf move to Go
+# zinit load asdf-vm/asdf
 
-# zinit ice depth=1 atload"source $ZSH_CONF/.p10k.zsh; _p9k_precmd" nocd wait'!' lucid
-# NOTE: my fork turns off the warning about instant prompt
-#zinit ice depth"1"; zinit light romkatv/powerlevel10k
-#zinit snippet $ZSH_CONF/.p10k.zsh
-# zinit light scalp42/powerlevel10k
-
-# zinit snippet OMZP::urltools
-
-zinit ice as"command" from"gh-r" \
-          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-          atpull"%atclone" src"init.zsh"
-zinit light starship/starship
-
-zinit wait lucid for    \
-  OMZL::directories.zsh \
-  OMZL::completion.zsh  \
-  OMZL::termsupport.zsh \
-  OMZL::compfix.zsh
-
-zinit snippet $ZSH_CONF/history.zsh
-zinit ice wait lucid; zinit snippet $ZSH_CONF/alias.zsh
-zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/functions.zsh
-zinit ice lucid; zinit snippet $ZSH_CONF/exports.zsh
-zinit ice wait=1 lucid; zinit snippet $ZSH_CONF/eval.zsh
-
-zinit ice silent wait=1; zinit light asdf-vm/asdf
-
-# NOTE: https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/fd
-# zinit ice as"completion" wait=1 lucid
-# zinit snippet OMZ::plugins/fd/_fd
-
-zinit light unixorn/fzf-zsh-plugin
-zinit ice wait=1 lucid atload"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
-
-# NOTE: opens in current window instead of new one
-# zinit ice wait lucid; zinit light valentinocossar/sublime
-
-zinit ice wait=1 lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"
-zinit light tj/git-extras
-
-zinit wait=1 lucid for            \
-  OMZP::cp                        \
-  OMZL::functions.zsh             \
-  OMZP::encode64                  \
-  djui/alias-tips                 \
-  OMZP::colored-man-pages         \
-  OMZP::safe-paste                \
-  ChrisPenner/copy-pasta          \
-  rtuin/zsh-case                  \
-  caarlos0-graveyard/zsh-git-sync \
-  rummik/zsh-ing                  \
-  robertzk/send.zsh               \
-  OMZP::sublime-merge             \
-  blockf atpull'zinit creinstall -q .' \
-    zsh-users/zsh-completions
-
-# zinit wait=1 lucid for OMZP::sublime
-
-# NOTE: see https://github.com/zdharma-continuum/zinit/issues/421 but preferring https://theunarchiver.com/command-line
-# NOTE: brew install unar instead
-# zinit ice svn wait=1 as=null lucid; zinit snippet PZTM::archive
-
-# NOTE: https://github.com/zsh-users/zsh-autosuggestions
-# zinit ice wait"1" lucid atload"!_zsh_autosuggest_start"
-# zinit light zsh-users/zsh-autosuggestions
-
-# NOTE: https://github.com/paoloantinori/hhighlighter
-zinit ice pick"h.sh" wait"1" lucid; zinit light paoloantinori/hhighlighter
-
-# NOTE: https://github.com/hlissner/zsh-autopair
-zinit ice wait=2 lucid; zinit light hlissner/zsh-autopair
+zinit ice turbo'2' wait lucid; zinit load ChrisPenner/copy-pasta
 
 # NOTE: https://github.com/marzocchi/zsh-notify
 # NOTE: brew install terminal-notifier
-zinit ice wait lucid atload'
+zinit ice wait'2' lucid atload'
   zstyle ":notify:*" error-title "Failed (in #{time_elapsed} seconds)"
   zstyle ":notify:*" success-title "Done (in #{time_elapsed} seconds)"
   zstyle ":notify:*" command-complete-timeout 15
@@ -103,31 +29,33 @@ zinit ice wait lucid atload'
   zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti|ag|nano|watch"'
 zinit light marzocchi/zsh-notify
 
-# zinit ice wait lucid atload"
-#   zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_packer' 'id_rsa_terraform' 'id_rsa_inspec'
-# "
-# zinit snippet PZT::modules/ssh/init.zsh
+# NOTE: speed up completion-related plugin loading by precompiling and blocking functions redefinitions
+zinit ice blockf compile lucid; zinit load zsh-users/zsh-completions
 
-# NOTE: https://github.com/axtl/gpg-agent.zsh
-# zinit ice wait"1" lucid
-# zinit light axtl/gpg-agent.zsh
+# NOTE: initialize the completion system now, so all completion functions are available
+autoload -Uz compinit
+compinit -d $ZSH_COMPDUMP
+zicdreplay -q
 
-# NOTE: https://github.com/supercrabtree/k
-zinit ice wait"2" lucid
-zinit light supercrabtree/k
+# NOTE: Defer loading of fzf-tab by 1 second after prompt display (for a snappier startup)
+# 'turbo' loads the plugin after 1 second of displaying the prompt
+zinit ice turbo'2' wait lucid; zinit load Aloxaf/fzf-tab
 
-# NOTE: https://github.com/mdumitru/last-working-dir
-# zinit light mdumitru/last-working-dir
+# NOTE: Defer loading of git-ignore until after the second prompt redraw
+# TODO: seems to hijack PATH?
+# further deferring non-essential functionality until after the shell is ready
+# zinit ice wait'2' lucid; zinit load laggardkernel/git-ignore
 
-zinit ice wait=1 lucid
-zinit light zdharma-continuum/fast-syntax-highlighting
+zinit ice pick"h.sh" turbo"2" lucid; zinit light paoloantinori/hhighlighter
 
-# NOTE: https://github.com/Aloxaf/fzf-tab
-zinit ice wait=2 lucid; zinit light Aloxaf/fzf-tab
-
-# NOTE: will reset bindkeys if needed
-# bindkey -d
-
-# NOTE: load last
-zinit ice wait silent nocompletions lucid atinit"autoload -Uz compinit && compinit -d $ZSH_COMPDUMP && zicdreplay -q"
-
+# NOTE: source exports.zsh last so that its PATH modifications take precedence
+# NOTE: `compile` = precompiles exports file to speed up subsequent shell starts
+# NOTE: `wait` = defers loading slightly so it doesn’t slow down initial prompt display
+# NOTE: `blockf` = block function redefinitions for speed
+# NOTE: `silent` = supress verbose output
+# TODO: debug why it's not working
+# zinit ice compile blockf silent
+# zinit snippet $ZSH_HOME/exports.zsh
+# zinit ice atload'export PATH="$HOME/.asdf/shims:$PATH"' compile blockf silent
+# zinit snippet "$ZSH_HOME/exports.zsh"
+source "$ZSH_HOME/exports.zsh"
