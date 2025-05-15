@@ -58,14 +58,22 @@ alias zclean='zi delete --clean'
 
 alias nnao="nano "
 
-# NOTE: VSCode aliases
-if which code &>/dev/null; then
-  alias co='code .'
-  alias coo='code -r .'
+# NOTE: VSCode aliases/functions
+vscode_path="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+if [[ -x "$vscode_path" ]]; then
+  function co() {
+    "$vscode_path" .
+  }
+  function coo() {
+    "$vscode_path" -r .
+  }
 else
-  vscode_not_found="echo 'VSCode not installed or not in PATH. Install VSCode and run: Install \"code\" command in PATH.'"
-  alias co=$vscode_not_found
-  alias coo=$vscode_not_found
+  function co() {
+    echo 'VSCode not installed or not in PATH. Install VSCode and run: Install "code" command in PATH.'
+  }
+  function coo() {
+    echo 'VSCode not installed or not in PATH. Install VSCode and run: Install "code" command in PATH.'
+  }
 fi
 
 alias backup_zsh='backup_zsh_function'
