@@ -58,6 +58,16 @@ alias zclean='zi delete --clean'
 
 alias nnao="nano "
 
+# NOTE: VSCode aliases
+if which code &>/dev/null; then
+  alias co='code .'
+  alias coo='code -r .'
+else
+  vscode_not_found="echo 'VSCode not installed or not in PATH. Install VSCode and run: Install \"code\" command in PATH.'"
+  alias co=$vscode_not_found
+  alias coo=$vscode_not_found
+fi
+
 alias backup_zsh='backup_zsh_function'
 
 if [[ -a "$ZSH_HOME/secrets/alias.zsh" ]]; then
