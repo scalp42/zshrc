@@ -35,6 +35,7 @@ detect_files = ['.tf']
 # error_symbol = '󰯆 '
 
 [kubernetes]
+disabled = false
 format = '[$symbol $context(\($namespace\))]($style) '
 detect_files = ['kustomization.yaml']
 symbol = '󱃾 '

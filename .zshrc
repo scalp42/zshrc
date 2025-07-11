@@ -12,3 +12,4 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # NOTE: load custom zinit config
 source $ZSH_HOME/zinit.zsh
+alias google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"

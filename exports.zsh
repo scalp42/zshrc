@@ -58,7 +58,8 @@ unsetopt FLOW_CONTROL         # disable ^S/^Q flow control
 
 export HOMEBREW_NO_ANALYTICS=1
 export TLDR_PARAM="yellow"
-export AWS_DEFAULT_REGION="us-west-2"
+# NOTE: aws-vault takes over
+# export AWS_DEFAULT_REGION="us-west-2"
 export AWS_PAGER=
 export PYTHONIOENCODING="UTF-8"
 # NOTE: enable persistent REPL history for `node`
