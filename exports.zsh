@@ -22,6 +22,7 @@ export GOBIN="${GOPATH}/bin"
 path=(
   "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
   /usr/local/opt/coreutils/libexec/gnubin
+  /opt/homebrew/bin
   /usr/local/bin
   /usr/local/opt/ruby/bin
   /usr/bin
@@ -72,7 +73,6 @@ export NODE_REPL_MODE="sloppy"
 export FZF_COMPLETION_TRIGGER='~~'
 export ZSH_TMUX_UNICODE=true
 export EXA_COLORS="da=1;34:gm=1;33:ga=1;32:gd=1;31:gv=1;33:gt=1;37:sn=37:sb=37"
-export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 export ASDF_FORCE_PREPEND=true
 export ASDF_HASHICORP_OVERWRITE_ARCH='arm64'
