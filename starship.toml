@@ -27,7 +27,6 @@ format = "[$time]($style) | "
 [terraform]
 format = 'via [$symbol($version )]($style) '
 symbol = '󱁢 '
-detect_files = ['.tf']
 
 [character]
 # success_symbol = '[➜](bold green) '
@@ -67,6 +66,6 @@ read_only = ' 🔒'
 detect_extensions = []
 symbol = '󰎙 '
 
-# TODO: not working
+# NOTE: deploy this starship.toml to PTI (NL-GKWV0JNX2X) for alias to work over SSH
 [hostname]
 aliases = { "NL-GKWV0JNX2X" = "PTI" }
