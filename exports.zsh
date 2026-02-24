@@ -42,7 +42,8 @@ for dir in \
   "${GOBIN}" \
   "${HOME}/.cargo/bin" \
   "${HOME}/.krew/bin" \
-  "${HOME}/.rd/bin"
+  "${HOME}/.rd/bin" \
+  "${HOME}/.local/bin"
 do
   [[ -d "${dir}" ]] && path+=("${dir}")
 done
@@ -76,6 +77,7 @@ export EXA_COLORS="da=1;34:gm=1;33:ga=1;32:gd=1;31:gv=1;33:gt=1;37:sn=37:sb=37"
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 export ASDF_FORCE_PREPEND=true
 export ASDF_HASHICORP_OVERWRITE_ARCH='arm64'
+export ANDROID_HOME="$HOME/Library/Android/sdk"
 
 # NOTE: source secrets if present
 if [[ -f "$ZSH_HOME/secrets/exports.zsh" ]]; then

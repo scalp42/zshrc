@@ -52,6 +52,9 @@ tag_symbol = ' 󰓹 '
 only_detached = false
 tag_disabled = false
 
+[gcloud]
+disabled = true
+
 [package]
 disabled = true
 
