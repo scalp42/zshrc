@@ -57,6 +57,7 @@ alias zupdate='zi update -r --all -p 20'
 alias zclean='zi delete --clean'
 
 alias nnao="nano "
+alias pn='pnpm'
 
 # NOTE: VSCode aliases/functions
 vscode_path="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"

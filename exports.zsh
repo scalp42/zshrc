@@ -15,9 +15,10 @@ export LC_ALL="en_US.UTF-8"
 # NOTE: normalize and remove duplicates from $path
 typeset -U path
 
-# NOTE: set GOPATH and GOBIN early so they're available for the loop
+# NOTE: set GOPATH, GOBIN, and PNPM_HOME early so they're available for the loop
 export GOPATH="${HOME}/go"
 export GOBIN="${GOPATH}/bin"
+export PNPM_HOME="${HOME}/Library/pnpm"
 
 path=(
   "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
@@ -43,7 +44,8 @@ for dir in \
   "${HOME}/.cargo/bin" \
   "${HOME}/.krew/bin" \
   "${HOME}/.rd/bin" \
-  "${HOME}/.local/bin"
+  "${HOME}/.local/bin" \
+  "${PNPM_HOME}"
 do
   [[ -d "${dir}" ]] && path+=("${dir}")
 done
