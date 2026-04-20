@@ -21,8 +21,8 @@ zinit ice turbo'2' wait lucid; zinit load ChrisPenner/copy-pasta
 
 # NOTE: https://github.com/marzocchi/zsh-notify
 # NOTE: brew install terminal-notifier
-# NOTE: only load zsh-notify if not in VS Code terminal to work around "zsh-notify: unsupported environment"
-if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+# NOTE: only load zsh-notify outside VS Code/Zed terminals to work around "zsh-notify: unsupported environment"
+if [[ "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "zed" ]]; then
   zinit ice wait'2' lucid atload'
     zstyle ":notify:*" error-title "Failed (in #{time_elapsed} seconds)"
     zstyle ":notify:*" success-title "Done (in #{time_elapsed} seconds)"
