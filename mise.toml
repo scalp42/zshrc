@@ -1,0 +1,35 @@
+# Migrated from asdf .tool-versions.
+# asdf's `nodejs`/`golang` are `node`/`go` here. TOML keys are unique, so only
+# one `node` line can be live at a time.
+
+[tools]
+# 99designs archived aws-vault at 7.2.0; bare `aws-vault` now resolves to the
+# ByteNess fork (7.3.0+). aqua backend is required — macOS ships as a .dmg,
+# which the github backend can't unpack.
+"aqua:99designs/aws-vault" = "7.2.0"
+# aws-vault = "7.13.4"   # maintained fork, swap in to migrate
+
+# Homebrew-managed. `path:` rather than `system`, which mise 2026.8.x deprecates
+# (warns `deprecated [system_tool_version]` on every shell). These formula names
+# are unversioned, so brew re-points opt/<name> on upgrade — nothing is pinned.
+# python is the exception: its only formula is versioned (python@3.14), so it
+# goes via the `python@3` alias, which homebrew-core re-points as the default
+# python moves. /libexec is the dir carrying a bare `python`/`pip`; bin/ has
+# only python3/pip3, which /opt/homebrew/bin already supplies.
+crystal   = "path:/opt/homebrew/opt/crystal"
+go        = "path:/opt/homebrew/opt/go"
+kubectl   = "1.27.3"
+node      = "path:/opt/homebrew/opt/node"
+nova      = "3.6.4"
+python    = "path:/opt/homebrew/opt/python@3/libexec"
+ruby      = "path:/opt/homebrew/opt/ruby"
+terraform = "1.10.5"
+tilt      = "0.34.0"
+
+# --- Alternative: keep `system` and mute the warning instead -----------------
+# Revert the five `path:` lines above to "system" and uncomment the two lines
+# below. `quiet` drops mise to errors-only, so it also hides the "new version
+# available" notice and any future warnings; `MISE_QUIET=0 mise ...` brings
+# them back for a single command. (--log-level=warning does NOT override it.)
+# [settings]
+# quiet = true

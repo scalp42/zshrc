@@ -20,10 +20,40 @@ export GOPATH="${HOME}/go"
 export GOBIN="${GOPATH}/bin"
 export PNPM_HOME="${HOME}/Library/pnpm"
 
+# NOTE: the M1 still runs asdf while the M5 moved to mise, so both version managers are
+# optional below and each block only kicks in when its tool is installed on the machine
+# _path_head collects the entries that must come before everything else, in order
+_path_head=()
+
+# NOTE: asdf shims must be the very first PATH entry so they win over Homebrew
+if [[ -d "${ASDF_DATA_DIR:-$HOME/.asdf}/shims" ]]; then
+  _path_head+=("${ASDF_DATA_DIR:-$HOME/.asdf}/shims")
+  export ASDF_FORCE_PREPEND=true
+  export ASDF_HASHICORP_OVERWRITE_ARCH='arm64'
+fi
+
+# NOTE: Homebrew Ruby goes right after the asdf shims so asdf can still route project-specific
+# versions, but its "system" fallback (from `ruby system` in ~/.tool-versions) finds Homebrew's
+# 4.x instead of the macOS /usr/bin ruby 2.6, the gems bindir must also beat /usr/bin, which
+# ships ancient bundle/rake/irb stubs for that system ruby
+# with mise, `ruby = "path:/opt/homebrew/opt/ruby"` in mise.toml prepends the same bin dir on
+# every prompt, so on the M5 the ruby entry here is a harmless duplicate
+# gems bindir uses ruby's ABI version (X.Y.0), derived from the cellar symlink so minor upgrades
+# (e.g. 4.0.x -> 4.1.x) are picked up automatically
+if [[ -x "${HOMEBREW_PREFIX}/opt/ruby/bin/ruby" ]]; then
+  _ruby_abi="${$(readlink "${HOMEBREW_PREFIX}/opt/ruby")##*/}"
+  _ruby_abi="${_ruby_abi%.*}.0"
+  _path_head+=(
+    "${HOMEBREW_PREFIX}/opt/ruby/bin"
+    "${HOMEBREW_PREFIX}/lib/ruby/gems/${_ruby_abi}/bin"
+  )
+  unset _ruby_abi
+fi
+
 path=(
-  "${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+  $_path_head
   /usr/local/opt/coreutils/libexec/gnubin
-  /opt/homebrew/bin
+  "${HOMEBREW_PREFIX}/bin"
   /usr/local/bin
   /usr/local/opt/ruby/bin
   /usr/bin
@@ -37,6 +67,7 @@ path=(
   "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
   $path
 )
+unset _path_head
 
 # NOTE: add directories that may not exist, but should be in PATH if they do
 for dir in \
@@ -49,6 +80,17 @@ for dir in \
 do
   [[ -d "${dir}" ]] && path+=("${dir}")
 done
+
+# NOTE: mise (replaces asdf on the M5) hooks into precmd and prepends its tool bins to PATH on
+# every prompt, so it is activated here, after the path array above is final, rather than in
+# eval.zsh, the activation script is cached and compiled like the ones in eval.zsh
+# after a mise upgrade: rm "$ZSH_CACHE/mise.zsh"
+if [[ -x "${HOMEBREW_PREFIX}/bin/mise" ]]; then
+  if [[ ! -f "$ZSH_CACHE/mise.zsh" ]]; then
+    "${HOMEBREW_PREFIX}/bin/mise" activate zsh > "$ZSH_CACHE/mise.zsh"
+  fi
+  compile_and_source "$ZSH_CACHE/mise.zsh"
+fi
 
 # NOTE: don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
@@ -77,8 +119,6 @@ export FZF_COMPLETION_TRIGGER='~~'
 export ZSH_TMUX_UNICODE=true
 export EXA_COLORS="da=1;34:gm=1;33:ga=1;32:gd=1;31:gv=1;33:gt=1;37:sn=37:sb=37"
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
-export ASDF_FORCE_PREPEND=true
-export ASDF_HASHICORP_OVERWRITE_ARCH='arm64'
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 
 # NOTE: source secrets if present

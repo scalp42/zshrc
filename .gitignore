@@ -126,3 +126,7 @@ nodes
 
 secrets/*
 cache/*
+
+# NOTE: shell history must never reach the remote, wherever it lives
+.zsh_history
+.zsh_history.backup.*

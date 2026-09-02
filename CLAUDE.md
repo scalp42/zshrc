@@ -17,16 +17,18 @@ Personal zsh configuration, modular by design. Symlinked from `~/.zsh` and loade
    - External plugins (zsh-completions, fzf-tab, zsh-notify, etc.) with turbo loading
    - `exports.zsh` sourced last (not via zinit) so PATH takes precedence
 3. `eval.zsh` - cached eval init for brew, starship, jump, ngrok (uses `compile_and_source()` from `functions.zsh`)
-4. `exports.zsh` - PATH construction, zsh options, env vars; must load after eval.zsh
+4. `exports.zsh` - PATH construction, zsh options, env vars; must load after eval.zsh. Detects the version manager per machine: asdf shims + `ASDF_*` exports when `~/.asdf/shims` exists (M1), cached `mise activate` when `/opt/homebrew/bin/mise` exists (M5). Homebrew Ruby and its gems bindir are placed ahead of `/usr/bin` on both
 
 **Secrets:** `secrets/` directory is gitignored. Three hook points auto-source secrets if present:
 - `secrets/exports.zsh` (from `exports.zsh`)
 - `secrets/alias.zsh` (from `alias.zsh`)
 - `secrets/eval.zsh` (from `eval.zsh`)
 
-**Caching strategy:** `eval.zsh` caches slow shell inits (starship, jump, chefvm, ngrok) to `$ZSH_CACHE/` as `.zsh` files, then compiles them to `.zwc` via `compile_and_source()`. Delete cached files to force regeneration.
+**Caching strategy:** `eval.zsh` caches slow shell inits (starship, jump, chefvm, ngrok) and `exports.zsh` caches `mise activate` to `$ZSH_CACHE/` as `.zsh` files, then compiles them to `.zwc` via `compile_and_source()`. Delete cached files to force regeneration.
 
 **Starship config:** `starship.toml` must be symlinked to `~/.config/starship.toml` to take effect.
+
+**mise config:** `mise.toml` must be symlinked to `~/mise.toml` to take effect (mise walks up from the cwd to `$HOME`, so a config in the home dir applies everywhere). Only needed on machines running mise.
 
 ## Key conventions
 
