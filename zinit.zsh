@@ -21,13 +21,14 @@ zinit ice turbo'2' wait lucid; zinit load ChrisPenner/copy-pasta
 
 # NOTE: https://github.com/marzocchi/zsh-notify
 # NOTE: brew install terminal-notifier
-# NOTE: only load zsh-notify outside VS Code/Zed terminals to work around "zsh-notify: unsupported environment"
-if [[ "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "zed" ]]; then
+# NOTE: zsh-notify only supports iTerm2 and Apple Terminal, anywhere else (VS Code, Zed, SSH sessions
+# where TERM_PROGRAM is not forwarded, ...) it prints "zsh-notify: unsupported environment" and bails
+# out, so we mirror its detection from notify.plugin.zsh and skip loading it instead of blocklisting terminals
+if [[ "$TERM_PROGRAM" == "iTerm.app" || "$TERM_PROGRAM" == "Apple_Terminal" || -n "$ITERM_SESSION_ID" || -n "$TERM_SESSION_ID" ]]; then
   zinit ice wait'2' lucid atload'
     zstyle ":notify:*" error-title "Failed (in #{time_elapsed} seconds)"
     zstyle ":notify:*" success-title "Done (in #{time_elapsed} seconds)"
     zstyle ":notify:*" command-complete-timeout 15
-    zstyle ":notify:*" enable-on-ssh yes
     zstyle ":notify:*" blacklist-regex "find|git|cd|l|ll|ls|cat|bat|man|gti|ag|nano|watch"'
   zinit light marzocchi/zsh-notify
 fi
