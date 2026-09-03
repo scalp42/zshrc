@@ -3,11 +3,6 @@
 # one `node` line can be live at a time.
 
 [tools]
-# 99designs archived aws-vault at 7.2.0; bare `aws-vault` now resolves to the
-# ByteNess fork (7.3.0+). aqua backend is required — macOS ships as a .dmg,
-# which the github backend can't unpack.
-"aqua:99designs/aws-vault" = "7.2.0"
-# aws-vault = "7.13.4"   # maintained fork, swap in to migrate
 
 # Homebrew-managed. `path:` rather than `system`, which mise 2026.8.x deprecates
 # (warns `deprecated [system_tool_version]` on every shell). These formula names
