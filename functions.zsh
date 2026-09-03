@@ -143,11 +143,16 @@ backup_zsh_function() {
   # NOTE: Move the backup to iCloud Drive
   mv "/tmp/$BACKUP_FILE" "$BACKUP_DIR/$BACKUP_FILE"
 
-  # NOTE: Keep only the 5 most recent backups
-  ls -t "$BACKUP_DIR"/zsh_backup_*.tar.gz 2>/dev/null | tail -n +6 | xargs rm -f 2>/dev/null
+  # NOTE: Keep only the 5 most recent backups (glob sorted newest first; handles spaces in path)
+  local -a backups
+  backups=("$BACKUP_DIR"/zsh_backup_*.tar.gz(N.om))
+  if (( ${#backups} > 5 )); then
+    command rm -f -- "${backups[@]:5}"
+  fi
 
   # NOTE: Count remaining backups
-  BACKUP_COUNT=$(ls -1 "$BACKUP_DIR"/zsh_backup_*.tar.gz 2>/dev/null | wc -l)
+  backups=("$BACKUP_DIR"/zsh_backup_*.tar.gz(N.om))
+  BACKUP_COUNT=${#backups}
 
   # NOTE: Print success message
   echo "✅ Backup created: $BACKUP_FILE"
