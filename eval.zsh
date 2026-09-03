@@ -35,6 +35,14 @@ if [[ -x "/opt/homebrew/bin/ngrok" ]]; then
   compile_and_source "$ZSH_CACHE/ngrok.zsh"
 fi
 
+# NOTE: https://github.com/junegunn/fzf#setting-up-shell-integration
+if (( ${+commands[fzf]} )); then
+  if [[ ! -f "$ZSH_CACHE/fzf.zsh" ]]; then
+    fzf --zsh > "$ZSH_CACHE/fzf.zsh"
+  fi
+  compile_and_source "$ZSH_CACHE/fzf.zsh"
+fi
+
 # NOTE: secrets evals
 if [[ -f "$ZSH_HOME/secrets/eval.zsh" ]]; then
   source "$ZSH_HOME/secrets/eval.zsh"
