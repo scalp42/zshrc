@@ -76,7 +76,8 @@ for dir in \
   "${HOME}/.krew/bin" \
   "${HOME}/.rd/bin" \
   "${HOME}/.local/bin" \
-  "${PNPM_HOME}"
+  "${HOME}/.lmstudio/bin" \
+  "${PNPM_HOME}/bin"
 do
   [[ -d "${dir}" ]] && path+=("${dir}")
 done
