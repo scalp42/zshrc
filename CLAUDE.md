@@ -24,6 +24,8 @@ Personal zsh configuration, modular by design. Symlinked from `~/.zsh` and loade
 - `secrets/alias.zsh` (from `alias.zsh`)
 - `secrets/eval.zsh` (from `eval.zsh`)
 
+**zinit snippet cache:** files loaded via `zinit snippet` (`history.zsh`, `alias.zsh`, `functions.zsh`, `eval.zsh`, `directories.zsh`, `fuck.zsh`) are copied into `~/.zinit/snippets/` and sourced from that copy. Editing the original has no effect until `zinit update "$ZSH_HOME/<file>.zsh"` (or `zupdate` for all) refreshes it. Files sourced directly (`.zshrc`, `zinit.zsh`, `exports.zsh`) don't need this.
+
 **Caching strategy:** `eval.zsh` caches slow shell inits (starship, jump, chefvm, ngrok) and `exports.zsh` caches `mise activate` to `$ZSH_CACHE/` as `.zsh` files, then compiles them to `.zwc` via `compile_and_source()`. Delete cached files to force regeneration.
 
 **Starship config:** `starship.toml` must be symlinked to `~/.config/starship.toml` to take effect.
