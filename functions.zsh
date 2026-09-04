@@ -69,26 +69,14 @@ backup_zsh_function() {
   TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
   BACKUP_FILE="zsh_backup_$TIMESTAMP.tar.gz"
 
-  # NOTE: secrets/, cache/ and .git/ stay out of the archive, which is built in a private temp
-  # dir with a 077 umask
+  # NOTE: the whole directory is archived so a restore needs nothing else. The archive is built
+  # in a private temp dir with a 077 umask and lands in iCloud with mode 600
   local staging
   staging="$(mktemp -d)" || return 1
   (
     umask 077
-    tar -czf "$staging/$BACKUP_FILE" -C "$HOME" \
-      --exclude='.zsh/secrets' \
-      --exclude='.zsh/cache' \
-      --exclude='.zsh/.git' \
-      .zsh
+    tar -czf "$staging/$BACKUP_FILE" -C "$HOME" .zsh
   ) || { command rm -rf "$staging"; return 1 }
-
-  # NOTE: a typo in the excludes above would silently ship secrets to iCloud, so the archive is
-  # listed and rejected when any excluded path made it in
-  if tar -tzf "$staging/$BACKUP_FILE" | grep -qE '^\.zsh/(secrets|cache|\.git)/'; then
-    print -u2 "backup_zsh: aborted, excluded paths leaked into the archive"
-    command rm -rf "$staging"
-    return 1
-  fi
 
   # NOTE: Move the backup to iCloud Drive
   mv "$staging/$BACKUP_FILE" "$BACKUP_DIR/$BACKUP_FILE" || {

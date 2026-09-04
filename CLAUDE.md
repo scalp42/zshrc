@@ -47,6 +47,6 @@ Personal zsh configuration, modular by design. Symlinked from `~/.zsh` and loade
 - **Measure shell startup time:** `avg-time 50` (runs 50 iterations)
 - **Update all zinit plugins:** `zupdate`
 - **Clean zinit:** `zclean`
-- **Backup zsh config to iCloud:** `backup_zsh` (excludes `secrets/`, `cache/`, `.git/`)
+- **Backup zsh config to iCloud:** `backup_zsh` (archives the whole directory, file mode 600)
 - **Regenerate cached evals:** automatic after a tool upgrade; to force it, delete the file in `~/.zsh/cache/` and restart the shell
 - **Throwaway Claude sessions:** `claudetmp` in `functions.zsh` runs `claude` from `~/claudetmp`, passing the launch folder with `--add-dir` (skipped for `$HOME`). Plain `claude` is untouched. Refresh the snippet cache after editing: `zinit update "$ZSH_HOME/functions.zsh"`
