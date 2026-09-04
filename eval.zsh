@@ -31,6 +31,22 @@ if (( ${+commands[fzf]} )); then
   cache_init fzf "${commands[fzf]}" fzf --zsh
 fi
 
+# NOTE: Ctrl-R keeps every command in the history file but hides navigation noise from the
+# search list. fzf's widget builds that list with `fc -rl 1`, so it is renamed and called with a
+# temporary fc function that filters its output. The original widget is untouched, fzf upgrades
+# keep working as long as the widget still calls fc
+if (( ${+functions[fzf-history-widget]} )); then
+  functions -c fzf-history-widget _fzf_history_widget_unfiltered
+  fzf-history-widget() {
+    fc() {
+      builtin fc "$@" | grep -vE '^ *[0-9]+\*? +(ls|ll|la|l|cd|pwd|clear|exit|xi|history|bg|fg|date)( .*)?$|^ *[0-9]+\*? +man |^ *[0-9]+\*? +.* --help$'
+    }
+    _fzf_history_widget_unfiltered
+    unfunction fc
+  }
+  zle -N fzf-history-widget
+fi
+
 # NOTE: secrets evals
 if [[ -f "$ZSH_HOME/secrets/eval.zsh" ]]; then
   source "$ZSH_HOME/secrets/eval.zsh"

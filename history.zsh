@@ -7,9 +7,6 @@ setopt APPEND_HISTORY
 # NOTE: save the time and how long a command ran
 setopt EXTENDED_HISTORY
 
-# NOTE: do not write events to history that are duplicates of the immediately previous event
-setopt HIST_IGNORE_DUPS
-
 # NOTE: even if there are commands in-between commands that are the same, still only save the last one
 setopt HIST_IGNORE_ALL_DUPS
 
@@ -45,9 +42,6 @@ setopt BANG_HIST
 
 HISTSIZE=10000000
 SAVEHIST=10000000
-
-HISTIGNORE="ll:ls:history:[bf]g:exit:pwd:clear:[ \t]*:man *:date:* --help:cd:cd *"
-HISTCONTROL=ignoreboth
 
 HISTFILE=$ZSH_CACHE/.zsh_history
 

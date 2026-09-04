@@ -1,11 +1,3 @@
-# NOTE: zsh-autosuggestions settings
-export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-export ZSH_AUTOSUGGEST_USE_ASYNC=true
-export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
-# NOTE: make pasting into terminal faster
-export DISABLE_MAGIC_FUNCTIONS=true
-
 export EDITOR="nano"
 export VISUAL="subl -w -n --"
 export PAGER="less"
@@ -50,25 +42,20 @@ fi
 
 path=(
   $_path_head
-  /usr/local/opt/coreutils/libexec/gnubin
   "${HOMEBREW_PREFIX}/bin"
-  /usr/local/bin
-  /usr/local/opt/ruby/bin
   /usr/bin
   /bin
   /usr/sbin
   /sbin
-  /usr/X11/bin
-  /opt/local/bin
-  /usr/local/sbin
   "/Applications/Google Chrome.app/Contents/MacOS"
-  "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
   $path
 )
 unset _path_head
 
 # NOTE: add directories that may not exist, but should be in PATH if they do
 for dir in \
+  /usr/local/bin \
+  /usr/local/sbin \
   "${GOBIN}" \
   "${HOME}/.cargo/bin" \
   "${HOME}/.krew/bin" \
@@ -76,7 +63,8 @@ for dir in \
   "${HOME}/.local/bin" \
   "${HOME}/.lmstudio/bin" \
   "${PNPM_HOME}/bin" \
-  "/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+  "/Applications/Sublime Text.app/Contents/SharedSupport/bin" \
+  "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 do
   [[ -d "${dir}" ]] && path+=("${dir}")
 done
@@ -97,14 +85,12 @@ fi
 export MANPAGER="less -X"
 
 # NOTE: zsh options
-setopt AUTOCD                 # cd by just typing directory name
 setopt INTERACTIVECOMMENTS    # allow inline comments
 setopt NOCLOBBER              # prevent overwriting files with '>'
 setopt RCQUOTES               # allow easier single quote usage
 unsetopt FLOW_CONTROL         # disable ^S/^Q flow control
 
 export HOMEBREW_NO_ANALYTICS=1
-export TLDR_PARAM="yellow"
 # NOTE: aws-vault takes over
 # export AWS_DEFAULT_REGION="us-west-2"
 export AWS_PAGER=
@@ -117,10 +103,8 @@ export NODE_REPL_HISTORY_SIZE="32768"
 export NODE_REPL_MODE="sloppy"
 # NOTE: https://github.com/junegunn/fzf#settings
 export FZF_COMPLETION_TRIGGER='~~'
-export ZSH_TMUX_UNICODE=true
-export EXA_COLORS="da=1;34:gm=1;33:ga=1;32:gd=1;31:gv=1;33:gt=1;37:sn=37:sb=37"
+export EZA_COLORS="da=1;34:gm=1;33:ga=1;32:gd=1;31:gv=1;33:gt=1;37:sn=37:sb=37"
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
 
 # NOTE: source secrets if present
 if [[ -f "$ZSH_HOME/secrets/exports.zsh" ]]; then

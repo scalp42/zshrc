@@ -7,13 +7,6 @@ zinit snippet $ZSH_HOME/eval.zsh
 zinit snippet $ZSH_HOME/completions.zsh
 zinit ice compile wait blockf silent; zinit snippet $ZSH_HOME/directories.zsh
 
-# TODO: optimize more if possible
-zinit ice wait'2' lucid; zinit snippet $ZSH_HOME/fuck.zsh
-
-# NOTE: load plugins that don't depend on completion first
-# TODO: busted with asdf move to Go
-# zinit load asdf-vm/asdf
-
 # NOTE: `wait'N'` is zinit's turbo mode: the plugin loads N seconds after the first prompt.
 # There is no `turbo` ice, an unknown ice word makes zinit drop every ice after it
 zinit ice wait'2' lucid; zinit load ChrisPenner/copy-pasta
@@ -53,21 +46,13 @@ zicdreplay -q
 # NOTE: fzf-tab must load after compinit, deferred to just after the first prompt
 zinit ice wait lucid; zinit load Aloxaf/fzf-tab
 
-# NOTE: Defer loading of git-ignore until after the second prompt redraw
-# TODO: seems to hijack PATH?
-# further deferring non-essential functionality until after the shell is ready
-# zinit ice wait'2' lucid; zinit load laggardkernel/git-ignore
+# NOTE: https://github.com/zsh-users/zsh-autosuggestions, loaded after fzf-tab as its README asks.
+# MANUAL_REBIND skips a per-prompt rebind, so the plugin is started explicitly once loaded
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+zinit ice wait'1' lucid atload'_zsh_autosuggest_start'; zinit light zsh-users/zsh-autosuggestions
 
 zinit ice pick"h.sh" wait'2' lucid; zinit light paoloantinori/hhighlighter
 
-# NOTE: source exports.zsh last so that its PATH modifications take precedence
-# NOTE: `compile` = precompiles exports file to speed up subsequent shell starts
-# NOTE: `wait` = defers loading slightly so it doesn’t slow down initial prompt display
-# NOTE: `blockf` = block function redefinitions for speed
-# NOTE: `silent` = supress verbose output
-# TODO: debug why it's not working
-# zinit ice compile blockf silent
-# zinit snippet $ZSH_HOME/exports.zsh
-# zinit ice atload'export PATH="$HOME/.asdf/shims:$PATH"' compile blockf silent
-# zinit snippet "$ZSH_HOME/exports.zsh"
+# NOTE: exports.zsh is sourced directly, not as a zinit snippet, so its PATH edits come last
 source "$ZSH_HOME/exports.zsh"

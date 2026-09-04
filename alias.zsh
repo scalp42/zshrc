@@ -1,9 +1,6 @@
 # NOTE: complete_aliases stays off so `gti <TAB>` and `gi <TAB>` expand to git and get its
 # completion instead of needing their own compdef
 
-# NOTE: remove oh-my-zsh directories lib aliases
-unalias l lsa ll la 2>/dev/null
-
 # NOTE: brew install eza
 alias ll='eza --classify --long --binary --group --git'
 alias la='eza --classify --long --binary --group --git --all'
@@ -24,22 +21,17 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
 alias flush="sudo killall -HUP mDNSResponder"
-alias sniff="sudo ngrep -d 'en0' -t '^(GET|POST) ' 'tcp and port 80'"
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 # NOTE: (N) expands an unmatched glob to nothing instead of aborting the whole command
 alias emptytrash='sudo rm -rfv /Volumes/*/.Trashes(N) ~/.Trash/*(DN) /private/var/log/asl/*.asl(N)'
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias killosx='echo "Kill affected applications" ; for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done'
-alias stoptime='sudo tmutil disablelocal'
-alias starttime='sudo tmutil enablelocal'
 alias gti=git
 alias gi=git
 alias ogc='open -a Google\ Chrome --args --disable-web-security'
 alias google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias pipu='pip3 freeze | xargs pip install --upgrade'
-alias rmv='rvm use 2.7.1 --install --create'
-alias dockerinit='eval "$(docker-machine env default)"; export DOCKER_IP=$(docker-machine ip default)'
 alias sssh='ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=999'
 alias week='date +%V'
 alias path='echo -e ${PATH//:/\\n}'
