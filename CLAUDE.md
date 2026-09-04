@@ -48,3 +48,4 @@ Personal zsh configuration, modular by design. Symlinked from `~/.zsh` and loade
 - **Clean zinit:** `zclean`
 - **Backup zsh config to iCloud:** `backup_zsh`
 - **Regenerate cached evals:** delete files in `~/.zsh/cache/` and restart shell
+- **Throwaway Claude sessions:** `claude()` in `functions.zsh` runs from `~/claudetmp` unless the cwd is inside a git repo, passing the launch folder with `--add-dir` (skipped for `$HOME`). `CLAUDE_NO_TMP=1 claude` bypasses it. Refresh the snippet cache after editing: `zinit update "$ZSH_HOME/functions.zsh"`
