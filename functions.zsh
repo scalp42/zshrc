@@ -169,20 +169,15 @@ function watch() {
   fi
 }
 
-# NOTE: Throwaway Claude sessions always run from ~/claudetmp so the per-directory state
-# Claude Code creates (a project entry in ~/.claude.json, ~/.claude/projects/<slug>/,
+# NOTE: claudetmp starts a throwaway Claude session from ~/claudetmp so the per-directory
+# state Claude Code creates (a project entry in ~/.claude.json, ~/.claude/projects/<slug>/,
 # .claude/settings.local.json in the cwd) piles up in one disposable place instead of
 # wherever the shell happened to be. The launch folder is passed with --add-dir unless
-# it is $HOME. Set CLAUDE_NO_TMP=1 to bypass once
-function claude() {
+# it is $HOME. Plain `claude` is untouched
+function claudetmp() {
   local scratch="$HOME/claudetmp"
-
-  if [[ -n "$CLAUDE_NO_TMP" ]]; then
-    command claude "$@"
-    return
-  fi
-
   local -a extra
+
   if [[ "$PWD" != "$HOME" && "$PWD" != "$scratch" ]]; then
     extra=(--add-dir "$PWD")
   fi
