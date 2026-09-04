@@ -51,6 +51,20 @@ HISTCONTROL=ignoreboth
 
 HISTFILE=$ZSH_CACHE/.zsh_history
 
+# NOTE: drop `claude --resume <session-id>` (and bare `claude --resume`) from history. The ids are
+# pasted from claude's exit message and never worth recalling. Named resumes such as
+# `claude --resume "my-session"` are kept since those are typed on purpose. Returning 1 skips the
+# line for both the in-memory list and the history file
+function zshaddhistory {
+    setopt localoptions extendedglob
+    local line=${1%%$'\n'}
+    local uuid='[0-9a-f](#c8)-[0-9a-f](#c4)-[0-9a-f](#c4)-[0-9a-f](#c4)-[0-9a-f](#c12)'
+    if [[ $line == claude[[:space:]]##(--resume|-r)([[:space:]]##${~uuid})#[[:space:]]# ]]; then
+        return 1
+    fi
+    return 0
+}
+
 # NOTE: backup history if needed
 function backup_history {
     cp "$HISTFILE" "$HISTFILE.backup.$(date +%Y%m%d%H%M%S)"
