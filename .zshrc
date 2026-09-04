@@ -2,6 +2,9 @@
 
 export ZSH_HOME=${HOME}/.zsh
 export ZSH_CACHE="${ZSH_HOME}/cache"
+# NOTE: cache/ is gitignored, so a fresh clone has none and cache_init, compinit and HISTFILE
+# would all fail without it
+[[ -d "$ZSH_CACHE" ]] || mkdir -p "$ZSH_CACHE"
 export ZSH_COMPDUMP="${ZSH_CACHE}/.zcompdump-${(%):-%m}-${ZSH_VERSION}"
 
 # NOTE: keep PATH and fpath free of duplicates, whatever the files below prepend

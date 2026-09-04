@@ -13,13 +13,13 @@ setopt HIST_IGNORE_ALL_DUPS
 # NOTE: remove extra blanks from each command line being added to history
 setopt HIST_REDUCE_BLANKS
 
-# NOTE: if a line starts with a space, don't save it.
+# NOTE: if a line starts with a space, don't save it
 setopt HIST_IGNORE_SPACE
 
-# NOTE: when using a hist thing, make a newline show the change before executing it.
+# NOTE: when using a hist thing, make a newline show the change before executing it
 setopt HIST_VERIFY
 
-# NOTE: allows history references to clobber files even when CLOBBER is unset.
+# NOTE: allows history references to clobber files even when CLOBBER is unset
 setopt HIST_ALLOW_CLOBBER
 
 # NOTE: don't store history (fc -l) command

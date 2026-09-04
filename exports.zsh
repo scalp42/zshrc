@@ -33,16 +33,18 @@ fi
 # gems bindir uses ruby's ABI version (X.Y.0), derived from the cellar symlink so minor upgrades
 # (e.g. 4.0.x -> 4.1.x) are picked up automatically
 if [[ -x "${HOMEBREW_PREFIX}/opt/ruby/bin/ruby" ]]; then
-  # NOTE: the gems bindir is found with a glob (no fork), newest ABI dir last so it wins
+  # NOTE: the gems bindir is found with a glob (no fork) and only the newest ABI dir is taken,
+  # `n` sorts numerically so 10.x beats 4.x and `On[1]` keeps the first entry in descending order
   _path_head+=(
     "${HOMEBREW_PREFIX}/opt/ruby/bin"
-    "${HOMEBREW_PREFIX}"/lib/ruby/gems/*/bin(N/on)
+    "${HOMEBREW_PREFIX}"/lib/ruby/gems/*/bin(N/nOn[1])
   )
 fi
 
 path=(
   $_path_head
   "${HOMEBREW_PREFIX}/bin"
+  "${HOMEBREW_PREFIX}/sbin"
   /usr/bin
   /bin
   /usr/sbin
@@ -52,9 +54,9 @@ path=(
 )
 unset _path_head
 
-# NOTE: add directories that may not exist, but should be in PATH if they do
+# NOTE: add directories that may not exist, but should be in PATH if they do. /usr/local/bin is
+# not listed because macOS's path_helper already puts it in the inherited PATH via /etc/paths
 for dir in \
-  /usr/local/bin \
   /usr/local/sbin \
   "${GOBIN}" \
   "${HOME}/.cargo/bin" \
@@ -71,7 +73,7 @@ done
 
 # NOTE: mise (replaces asdf on the M5) hooks into precmd and prepends its tool bins to PATH on
 # every prompt, so it is activated here, after the path array above is final, rather than in
-# eval.zsh. cache_init regenerates the cached activation script after a mise upgrade.
+# eval.zsh, and cache_init regenerates the cached activation script after a mise upgrade
 # The current shell's mise state is stripped from the generator's environment: with MISE_SHELL
 # set, `mise activate` emits a deactivate preamble containing a literal PATH snapshot, which
 # every later shell would replay over its freshly built path array

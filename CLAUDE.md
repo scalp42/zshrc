@@ -14,9 +14,9 @@ Personal zsh configuration, modular by design. Symlinked from `~/.zsh` and loade
 1. `.zshrc` - bootstraps zinit, sets core env vars (`ZSH_HOME`, `ZSH_CACHE`, `ZSH_COMPDUMP`)
 2. `zinit.zsh` - loads modules via zinit snippets/plugins in this order:
    - `history.zsh` → `alias.zsh` → `functions.zsh` → `eval.zsh` → `completions.zsh` → `directories.zsh` (deferred)
-   - `zsh-completions`, then `compinit` (with `-C`, a full compaudit run happens once a day keyed on the dump's mtime), then fzf-tab, zsh-autosuggestions, copy-pasta, hhighlighter deferred with `wait` (zinit's turbo mode; there is no `turbo` ice)
+   - copy-pasta (declared before compinit), `zsh-completions`, then `compinit` (with `-C`, a full compaudit run happens once a day keyed on the dump's mtime), then fzf-tab, zsh-autosuggestions, hhighlighter. All four plugins are deferred with `wait'N'` (zinit's turbo mode; there is no `turbo` ice), so declaration order only matters for the ones that must follow compinit
    - `exports.zsh` sourced last (not via zinit) so PATH takes precedence
-3. `eval.zsh` - static Homebrew exports (replaces the `brew shellenv` fork) and cached init for starship, jump, fzf via `cache_init()` from `functions.zsh`
+3. `eval.zsh` - static Homebrew exports plus a bin/sbin PATH prepend (replaces the `brew shellenv` fork), cached init for starship, jump, fzf via `cache_init()` from `functions.zsh`, and a local copy of fzf's Ctrl-R widget with a grep step that hides navigation noise (`cd`, `ls`, `man`, `--help`, ...) from the search list while the history file keeps everything
 4. `exports.zsh` - PATH construction, zsh options, env vars; must load after eval.zsh. Detects the version manager per machine: asdf shims + `ASDF_*` exports when `~/.asdf/shims` exists (M1), cached `mise activate` when `/opt/homebrew/bin/mise` exists (M5). Homebrew Ruby and its gems bindir are placed ahead of `/usr/bin` on both
 
 **Secrets:** `secrets/` directory is gitignored and mode 700, files 600. Three hook points auto-source secrets if present:

@@ -63,7 +63,7 @@ backup_zsh_function() {
   BACKUP_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/backup"
 
   # NOTE: Create the backup directory if it doesn't exist
-  mkdir -p "$BACKUP_DIR"
+  mkdir -p "$BACKUP_DIR" || { print -u2 "backup_zsh: could not create $BACKUP_DIR"; return 1 }
 
   # NOTE: Create a timestamped filename for the backup
   TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
@@ -82,8 +82,20 @@ backup_zsh_function() {
       .zsh
   ) || { command rm -rf "$staging"; return 1 }
 
+  # NOTE: a typo in the excludes above would silently ship secrets to iCloud, so the archive is
+  # listed and rejected when any excluded path made it in
+  if tar -tzf "$staging/$BACKUP_FILE" | grep -qE '^\.zsh/(secrets|cache|\.git)/'; then
+    print -u2 "backup_zsh: aborted, excluded paths leaked into the archive"
+    command rm -rf "$staging"
+    return 1
+  fi
+
   # NOTE: Move the backup to iCloud Drive
-  mv "$staging/$BACKUP_FILE" "$BACKUP_DIR/$BACKUP_FILE"
+  mv "$staging/$BACKUP_FILE" "$BACKUP_DIR/$BACKUP_FILE" || {
+    print -u2 "backup_zsh: could not move the archive to $BACKUP_DIR"
+    command rm -rf "$staging"
+    return 1
+  }
   command rm -rf "$staging"
 
   # NOTE: Keep only the 5 most recent backups (glob sorted newest first; handles spaces in path)

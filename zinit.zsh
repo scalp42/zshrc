@@ -7,8 +7,8 @@ zinit snippet $ZSH_HOME/eval.zsh
 zinit snippet $ZSH_HOME/completions.zsh
 zinit ice compile wait blockf silent; zinit snippet $ZSH_HOME/directories.zsh
 
-# NOTE: `wait'N'` is zinit's turbo mode: the plugin loads N seconds after the first prompt.
-# There is no `turbo` ice, an unknown ice word makes zinit drop every ice after it
+# NOTE: `wait'N'` is zinit's turbo mode: the plugin loads N seconds after the first prompt
+# (there is no `turbo` ice, an unknown ice word makes zinit drop every ice after it)
 zinit ice wait'2' lucid; zinit load ChrisPenner/copy-pasta
 
 # NOTE: https://github.com/marzocchi/zsh-notify
@@ -28,8 +28,8 @@ fi
 # NOTE: speed up completion-related plugin loading by precompiling and blocking functions redefinitions
 zinit ice blockf compile lucid; zinit load zsh-users/zsh-completions
 
-# NOTE: initialize the completion system now, so all completion functions are available.
-# `-C` skips compaudit's ownership scan of every fpath dir (~20ms per start) and the check for
+# NOTE: initialize the completion system now, so all completion functions are available, with
+# `-C` skipping compaudit's ownership scan of every fpath dir (~20ms per start) and the check for
 # new completion functions, the full run still happens once a day, keyed on the dump's mtime
 autoload -Uz compinit
 () {
@@ -46,8 +46,8 @@ zicdreplay -q
 # NOTE: fzf-tab must load after compinit, deferred to just after the first prompt
 zinit ice wait lucid; zinit load Aloxaf/fzf-tab
 
-# NOTE: https://github.com/zsh-users/zsh-autosuggestions, loaded after fzf-tab as its README asks.
-# MANUAL_REBIND skips a per-prompt rebind, so the plugin is started explicitly once loaded
+# NOTE: https://github.com/zsh-users/zsh-autosuggestions, loaded after fzf-tab as its README asks,
+# with MANUAL_REBIND skipping a per-prompt rebind, so the plugin is started explicitly once loaded
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 zinit ice wait'1' lucid atload'_zsh_autosuggest_start'; zinit light zsh-users/zsh-autosuggestions

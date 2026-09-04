@@ -40,8 +40,10 @@ alias sttt='subl -a .'
 
 # NOTE: https://github.com/kaelzhang/shell-safe-rm moves files to the macOS Trash instead of
 # unlinking them, installed with `pnpm add -g safe-rm` (the Homebrew formula of the same name is
-# an unrelated tool that deletes permanently). Only aliased when present so rm never breaks
-if (( ${+commands[safe-rm]} )) alias rm='safe-rm'
+# an unrelated tool that deletes permanently). Only aliased when present so rm never breaks,
+# checked by absolute path because alias.zsh loads before exports.zsh adds the pnpm bin dir to
+# PATH, a `commands[safe-rm]` lookup here always missed and left rm unlinking for real
+if [[ -x "$HOME/Library/pnpm/bin/safe-rm" ]] alias rm="$HOME/Library/pnpm/bin/safe-rm"
 
 # NOTE: if pbzip2/pigz are available, alias them as they are drop-in replacements for bzip2/gzip, respectively
 if (( ${+commands[pbzip2]} )) alias bzip2='pbzip2'

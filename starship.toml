@@ -4,6 +4,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
+# NOTE: the 500 ms default is too short for the kubernetes and version modules on a cold cache
+command_timeout = 2000
 format = "$time$all$kubernetes$line_break$character"
 
 [aws]

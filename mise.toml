@@ -6,7 +6,7 @@
 
 # Homebrew-managed. `path:` rather than `system`, which mise 2026.8.x deprecates
 # (warns `deprecated [system_tool_version]` on every shell). These formula names
-# are unversioned, so brew re-points opt/<name> on upgrade — nothing is pinned.
+# are unversioned, so brew re-points opt/<name> on upgrade, nothing is pinned
 # python is the exception: its only formula is versioned (python@3.14), so it
 # goes via the `python@3` alias, which homebrew-core re-points as the default
 # python moves. /libexec is the dir carrying a bare `python`/`pip`; bin/ has
