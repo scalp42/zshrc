@@ -1,46 +1,34 @@
-# NOTE: if Homebrew is installed, run its shellenv first
-if [ -x /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+# NOTE: `brew shellenv` only produces these constants on Apple Silicon, exporting them
+# statically saves a ~9ms fork on every shell start. PATH is built in exports.zsh, and the
+# site-functions dir is already in zsh's compiled-in fpath (`typeset -U fpath` in .zshrc
+# drops the duplicate)
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+  export HOMEBREW_REPOSITORY="/opt/homebrew"
+  # NOTE: guarded so nested shells don't prepend the same entry again
+  [[ ":${INFOPATH:-}:" == *:/opt/homebrew/share/info:* ]] || export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+  fpath=("/opt/homebrew/share/zsh/site-functions" $fpath)
+  # NOTE: a leading ":" tells man to search its default paths too, mirrors `brew shellenv`
+  [[ -z "${MANPATH-}" ]] || export MANPATH=":${MANPATH#:}"
 fi
 
+# NOTE: the blocks below cache each tool's init script via cache_init (functions.zsh), which
+# regenerates the cache whenever the tool's binary is newer than it
+
 # NOTE: https://starship.rs
-if [[ -x "/opt/homebrew/bin/starship" ]]; then
-  if [[ ! -f "$ZSH_CACHE/starship.zsh" ]]; then
-    starship init zsh > "$ZSH_CACHE/starship.zsh"
-  fi
-  compile_and_source "$ZSH_CACHE/starship.zsh"
+if (( ${+commands[starship]} )); then
+  cache_init starship "${commands[starship]}" starship init zsh
 fi
 
 # NOTE: https://github.com/gsamokovarov/jump
 if (( ${+commands[jump]} )); then
-  if [[ ! -f "$ZSH_CACHE/jump.zsh" ]]; then
-    jump shell > "$ZSH_CACHE/jump.zsh"
-  fi
-  compile_and_source "$ZSH_CACHE/jump.zsh"
-fi
-
-# NOTE: https://github.com/trobrock/chefvm
-if [[ -x "$HOME/.chefvm/bin/chefvm" ]]; then
-  if [[ ! -f "$ZSH_CACHE/chefvm.zsh" ]]; then
-    $HOME/.chefvm/bin/chefvm init - > "$ZSH_CACHE/chefvm.zsh"
-  fi
-  compile_and_source "$ZSH_CACHE/chefvm.zsh"
-fi
-
-# NOTE: https://ngrok.com
-if [[ -x "/opt/homebrew/bin/ngrok" ]]; then
-  if [[ ! -f "$ZSH_CACHE/ngrok.zsh" ]]; then
-    ngrok completion > "$ZSH_CACHE/ngrok.zsh"
-  fi
-  compile_and_source "$ZSH_CACHE/ngrok.zsh"
+  cache_init jump "${commands[jump]}" jump shell zsh
 fi
 
 # NOTE: https://github.com/junegunn/fzf#setting-up-shell-integration
 if (( ${+commands[fzf]} )); then
-  if [[ ! -f "$ZSH_CACHE/fzf.zsh" ]]; then
-    fzf --zsh > "$ZSH_CACHE/fzf.zsh"
-  fi
-  compile_and_source "$ZSH_CACHE/fzf.zsh"
+  cache_init fzf "${commands[fzf]}" fzf --zsh
 fi
 
 # NOTE: secrets evals

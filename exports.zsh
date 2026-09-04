@@ -9,11 +9,11 @@ export DISABLE_MAGIC_FUNCTIONS=true
 export EDITOR="nano"
 export VISUAL="subl -w -n --"
 export PAGER="less"
+# NOTE: LANG alone is enough, LC_ALL would override any per-category setting (LC_COLLATE=C ...)
 export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
 
-# NOTE: normalize and remove duplicates from $path
-typeset -U path
+# NOTE: eval.zsh normally sets HOMEBREW_PREFIX, the default keeps the PATH below sane if it didn't
+: ${HOMEBREW_PREFIX:=/opt/homebrew}
 
 # NOTE: set GOPATH, GOBIN, and PNPM_HOME early so they're available for the loop
 export GOPATH="${HOME}/go"
@@ -41,13 +41,11 @@ fi
 # gems bindir uses ruby's ABI version (X.Y.0), derived from the cellar symlink so minor upgrades
 # (e.g. 4.0.x -> 4.1.x) are picked up automatically
 if [[ -x "${HOMEBREW_PREFIX}/opt/ruby/bin/ruby" ]]; then
-  _ruby_abi="${$(readlink "${HOMEBREW_PREFIX}/opt/ruby")##*/}"
-  _ruby_abi="${_ruby_abi%.*}.0"
+  # NOTE: the gems bindir is found with a glob (no fork), newest ABI dir last so it wins
   _path_head+=(
     "${HOMEBREW_PREFIX}/opt/ruby/bin"
-    "${HOMEBREW_PREFIX}/lib/ruby/gems/${_ruby_abi}/bin"
+    "${HOMEBREW_PREFIX}"/lib/ruby/gems/*/bin(N/on)
   )
-  unset _ruby_abi
 fi
 
 path=(
@@ -77,20 +75,22 @@ for dir in \
   "${HOME}/.rd/bin" \
   "${HOME}/.local/bin" \
   "${HOME}/.lmstudio/bin" \
-  "${PNPM_HOME}/bin"
+  "${PNPM_HOME}/bin" \
+  "/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 do
   [[ -d "${dir}" ]] && path+=("${dir}")
 done
 
 # NOTE: mise (replaces asdf on the M5) hooks into precmd and prepends its tool bins to PATH on
 # every prompt, so it is activated here, after the path array above is final, rather than in
-# eval.zsh, the activation script is cached and compiled like the ones in eval.zsh
-# after a mise upgrade: rm "$ZSH_CACHE/mise.zsh"
+# eval.zsh. cache_init regenerates the cached activation script after a mise upgrade.
+# The current shell's mise state is stripped from the generator's environment: with MISE_SHELL
+# set, `mise activate` emits a deactivate preamble containing a literal PATH snapshot, which
+# every later shell would replay over its freshly built path array
 if [[ -x "${HOMEBREW_PREFIX}/bin/mise" ]]; then
-  if [[ ! -f "$ZSH_CACHE/mise.zsh" ]]; then
-    "${HOMEBREW_PREFIX}/bin/mise" activate zsh > "$ZSH_CACHE/mise.zsh"
-  fi
-  compile_and_source "$ZSH_CACHE/mise.zsh"
+  cache_init mise "${HOMEBREW_PREFIX}/bin/mise" \
+    env -u MISE_SHELL -u __MISE_SESSION -u __MISE_DIFF -u __MISE_ORIG_PATH \
+    "${HOMEBREW_PREFIX}/bin/mise" activate zsh
 fi
 
 # NOTE: don't clear the screen after quitting a manual page

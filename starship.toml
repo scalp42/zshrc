@@ -5,7 +5,6 @@
 
 add_newline = true
 format = "$time$all$kubernetes$line_break$character"
-command_timeout = 2000
 
 [aws]
 # disabled = true

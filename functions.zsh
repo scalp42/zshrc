@@ -1,5 +1,6 @@
+# NOTE: search the whole history, the `history` builtin alone only lists recent entries
 function greph () {
-  history | grep $1
+  fc -l 1 | grep -- "$1"
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
@@ -9,34 +10,6 @@ function server() {
   # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
   # And serve everything as UTF-8 (although not technically correct, this doesn't break anything for binary files)
   python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
-}
-
-# Gzip-enabled `curl`
-function gurl() {
-  curl -sH "Accept-Encoding: gzip" "$@" | gunzip
-}
-
-# All the dig info
-function digg() {
-  dig +nocmd "$1" any +multiline +noall +answer
-}
-
-# Escape UTF-8 characters into their 3-byte format
-function escape() {
-  printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u)
-  echo # newline
-}
-
-# Decode \x{ABCD}-style Unicode escape sequences
-function unidecode() {
-  perl -e "binmode(STDOUT, ':utf8'); print \"$@\""
-  echo # newline
-}
-
-# Get a character's Unicode code point
-function codepoint() {
-  perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))"
-  echo # newline
 }
 
 # # Print MySQL grants
@@ -79,51 +52,43 @@ function avg-time() {
 
 if (( ${+commands[jump]} )) jc() { j "$(basename $PWD)/*/$@" }
 
-# NOTE: helper function to handle .zsh -> .zwc compilation and sourcing
+# NOTE: helper function to handle .zsh -> .zwc compilation and sourcing. zcompile writes
+# <src>.zwc, and `source <src>` automatically uses that compiled file whenever it is not older
+# than the source, so only the compile step needs a freshness check (a .zwc can't be sourced
+# by its own name, zsh would parse the bytecode as text)
 compile_and_source() {
   local src="$1"
-  local compiled="${src:r}.zwc"
+  [[ -f "$src" ]] || return 1
 
-  # NOTE: only compile if source is newer than compiled or compiled doesn't exist
-  if [[ -f "$src" && ( ! -f "$compiled" || "$src" -nt "$compiled" ) ]]; then
+  if [[ ! -f "$src.zwc" || "$src" -nt "$src.zwc" ]]; then
     zcompile "$src"
   fi
 
-  # NOTE: if compiled exists, source it; otherwise source the plain file
-  if [[ -f "$compiled" ]]; then
-    source "$compiled"
-  else
-    [[ -f "$src" ]] && source "$src"
-  fi
+  source "$src"
 }
 
-# FIXME: hangs, not working
-# zcompile_eval() {
-#   local filename="${ZSH_CACHE}/${1}"
-#   shift
+# NOTE: cache_init runs a tool's shell-init command once and caches its output as
+# $ZSH_CACHE/<name>.zsh, then compiles and sources it. The cache is regenerated when it is
+# missing, empty, or older than the tool's binary, so `brew upgrade` picks up new init code
+# without a manual rm. Output goes to a temp file first and only replaces the cache when the
+# command succeeded and printed something, so a failed run can't leave an empty cache that is
+# sourced forever. Usage: cache_init <name> <binary> <command> [args...]
+cache_init() {
+  local name="$1" bin="$2"
+  shift 2
+  local cache="$ZSH_CACHE/$name.zsh"
 
-#   if [ ! -f "$filename" ]; then
-#     mkdir -p "$(dirname "$filename")"
-#     "$@" > "$filename"
-#     zcompile "$filename"
-#   fi
-
-#   source "$filename"
-# }
-
-function omz_urlencode() {
-  emulate -L zsh
-  # If the first argument is "-P", skip it.
-  if [[ "$1" == "-P" ]]; then
-    shift
+  if [[ ! -s "$cache" || "$bin" -nt "$cache" ]]; then
+    if "$@" >| "$cache.tmp" 2>/dev/null && [[ -s "$cache.tmp" ]]; then
+      command mv -f "$cache.tmp" "$cache"
+    else
+      command rm -f "$cache.tmp"
+      print -u2 "cache_init: could not generate $cache from: $*"
+      return 1
+    fi
   fi
-  local string="$1"
-  if command -v python3 > /dev/null 2>&1; then
-    python3 -c "import urllib.parse, sys; sys.stdout.write(urllib.parse.quote(sys.argv[1]))" "$string"
-  else
-    # A simple fallback (does not encode all characters)
-    echo "${string// /%20}"
-  fi
+
+  compile_and_source "$cache"
 }
 
 backup_zsh_function() {
@@ -137,11 +102,22 @@ backup_zsh_function() {
   TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
   BACKUP_FILE="zsh_backup_$TIMESTAMP.tar.gz"
 
-  # NOTE: Create the backup using tar (preserves special files)
-  tar -czf "/tmp/$BACKUP_FILE" -C "$HOME" .zsh
+  # NOTE: secrets/, cache/ and .git/ stay out of the archive, which is built in a private temp
+  # dir with a 077 umask
+  local staging
+  staging="$(mktemp -d)" || return 1
+  (
+    umask 077
+    tar -czf "$staging/$BACKUP_FILE" -C "$HOME" \
+      --exclude='.zsh/secrets' \
+      --exclude='.zsh/cache' \
+      --exclude='.zsh/.git' \
+      .zsh
+  ) || { command rm -rf "$staging"; return 1 }
 
   # NOTE: Move the backup to iCloud Drive
-  mv "/tmp/$BACKUP_FILE" "$BACKUP_DIR/$BACKUP_FILE"
+  mv "$staging/$BACKUP_FILE" "$BACKUP_DIR/$BACKUP_FILE"
+  command rm -rf "$staging"
 
   # NOTE: Keep only the 5 most recent backups (glob sorted newest first; handles spaces in path)
   local -a backups
@@ -158,6 +134,43 @@ backup_zsh_function() {
   echo "✅ Backup created: $BACKUP_FILE"
   echo "📁 Location: $BACKUP_DIR"
   echo "🔢 Total backups: $BACKUP_COUNT (maximum: 5)"
+}
+
+# NOTE: keep is the menu bar mouse jiggler in ~/projs/keep. Starts it detached through its
+# LaunchAgent when one is installed, otherwise directly; no-op if it is already running
+keepbar() {
+  local label="com.scalp.keep" plist="$HOME/Library/LaunchAgents/com.scalp.keep.plist"
+  if launchctl print "gui/$(id -u)/$label" >/dev/null 2>&1; then
+    if launchctl print "gui/$(id -u)/$label" | grep -qE "state.=.running"; then
+      echo "keep is already running (check the menu bar)."
+    else
+      launchctl kickstart "gui/$(id -u)/$label" && echo "keep started."
+    fi
+  elif [ -f "$plist" ]; then
+    launchctl bootstrap "gui/$(id -u)" "$plist" && echo "keep started."
+  else
+    nohup ~/projs/keep/.venv/bin/python3 ~/projs/keep/keep_menubar.py >>"$HOME/Library/Logs/keep.log" 2>&1 &!
+    echo "keep started (no LaunchAgent installed; use 'Start at login' in its menu to add one)."
+  fi
+}
+
+# NOTE: cat runs bat (plain style, no pager) for highlighted output. The real cat is used when
+# bat is not installed (checked on every call, so `brew install bat` works without a new shell)
+# and for the flags bat doesn't have (-v -e -t -b -E -T), so `cat -v file` keeps working
+cat() {
+  if (( ${+commands[bat]} )); then
+    local arg
+    for arg in "$@"; do
+      [[ "$arg" == "--" ]] && break
+      if [[ "$arg" == -[^-]* && "$arg" == *[vetbET]* ]]; then
+        command cat "$@"
+        return
+      fi
+    done
+    bat -pP "$@"
+  else
+    command cat "$@"
+  fi
 }
 
 # NOTE: Watch function that uses viddy if available, otherwise uses standard watch
