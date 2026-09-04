@@ -43,14 +43,36 @@ autoload -Uz compinit
 }
 zicdreplay -q
 
-# NOTE: fzf-tab must load after compinit, deferred to just after the first prompt
-zinit ice wait lucid; zinit load Aloxaf/fzf-tab
+# NOTE: Tab accepts the grey autosuggestion ($POSTDISPLAY) when the cursor sits at the end of
+# the line and the completed line is an exact history entry, otherwise it falls through to
+# fzf-tab. The completion strategy also fills the grey text, with the first candidate of the
+# very menu fzf-tab would show, so accepting every suggestion would hide the menu on nearly
+# every Tab. autosuggest-accept itself ignores a cursor that is not at the end, which would
+# turn Tab into a dead key. Shift+Tab always opens fzf-tab
+tab-accept-or-complete() {
+  if [[ -n "$POSTDISPLAY" ]] && (( CURSOR == $#BUFFER )) \
+      && [[ -n "${history[(re)${BUFFER}${POSTDISPLAY}]}" ]]; then
+    zle autosuggest-accept
+  else
+    zle fzf-tab-complete
+  fi
+}
+zle -N tab-accept-or-complete
+
+# NOTE: fzf-tab must load after compinit, deferred to just after the first prompt. Our Tab
+# widget is bound in atload because fzf-tab binds ^I itself on load, in the same two keymaps
+zinit ice wait lucid atload'bindkey -M emacs "^I" tab-accept-or-complete; bindkey -M viins "^I" tab-accept-or-complete; bindkey -M emacs "^[[Z" fzf-tab-complete; bindkey -M viins "^[[Z" fzf-tab-complete'
+zinit load Aloxaf/fzf-tab
 
 # NOTE: https://github.com/zsh-users/zsh-autosuggestions, loaded after fzf-tab as its README asks,
 # with MANUAL_REBIND skipping a per-prompt rebind, so the plugin is started explicitly once loaded
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-zinit ice wait'1' lucid atload'_zsh_autosuggest_start'; zinit light zsh-users/zsh-autosuggestions
+# NOTE: The plugin wraps every unlisted widget as a "modify" widget, which empties $POSTDISPLAY
+# before the wrapped widget runs, so our Tab widget is added to the ignore list to stay
+# unwrapped. Appended in atload so the plugin's own default entries stay in place
+zinit ice wait'1' lucid atload'ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(tab-accept-or-complete); _zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
 
 zinit ice pick"h.sh" wait'2' lucid; zinit light paoloantinori/hhighlighter
 

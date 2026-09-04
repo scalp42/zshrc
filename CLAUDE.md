@@ -47,6 +47,7 @@ Personal zsh configuration, modular by design. Symlinked from `~/.zsh` and loade
 - **Measure shell startup time:** `avg-time 50` (runs 50 iterations)
 - **Update all zinit plugins:** `zupdate`
 - **Clean zinit:** `zclean`
-- **Backup zsh config to iCloud:** `backup_zsh` (archives the whole directory, file mode 600)
+- **Backup zsh config to iCloud:** `backup_zsh`, an encrypted 7z (AES-256, encrypted headers) with the password from the login keychain item `zsh-backup` (created on the first run). Needs `brew install sevenzip`. Keeps the 5 newest `zsh_backup_*.7z`
+- **Restore on a new Mac:** `brew install sevenzip && 7zz x -o"$HOME" zsh_backup_<timestamp>.7z` (prompts for the password), then `ln -sf ~/.zsh/.zshrc ~/.zshrc`. Keka opens the file by double-click as well. The login keychain does not sync, so the first `backup_zsh` on the new Mac asks for the password again: enter the same one, each archive opens only with the password that was in the keychain when it was created
 - **Regenerate cached evals:** automatic after a tool upgrade; to force it, delete the file in `~/.zsh/cache/` and restart the shell
 - **Throwaway Claude sessions:** `claudetmp` in `functions.zsh` runs `claude` from `~/claudetmp`, passing the launch folder with `--add-dir` (skipped for `$HOME`). Plain `claude` is untouched. Refresh the snippet cache after editing: `zinit update "$ZSH_HOME/functions.zsh"`

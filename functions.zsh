@@ -59,6 +59,19 @@ cache_init() {
 }
 
 backup_zsh_function() {
+  # NOTE: 7zz comes from `brew install sevenzip`, p7zip's 7z shares the command line
+  local sevenzip=${commands[7zz]:-${commands[7z]}}
+  [[ -n $sevenzip ]] || { print -u2 "backup_zsh: install 7-Zip with: brew install sevenzip"; return 1 }
+
+  # NOTE: the archive password lives in the login keychain. The first run on a machine creates
+  # the item (security prompts twice with hidden input), later runs read it without a prompt
+  local pw
+  pw=$(security find-generic-password -a "$USER" -s zsh-backup -w 2>/dev/null) || {
+    print "backup_zsh: enter the archive password (reuse the one from your other Mac so older archives still open), it is saved in the login keychain as zsh-backup"
+    security add-generic-password -a "$USER" -s zsh-backup -w || return 1
+    pw=$(security find-generic-password -a "$USER" -s zsh-backup -w) || return 1
+  }
+
   # NOTE: Set the backup directory
   BACKUP_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/backup"
 
@@ -67,16 +80,18 @@ backup_zsh_function() {
 
   # NOTE: Create a timestamped filename for the backup
   TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-  BACKUP_FILE="zsh_backup_$TIMESTAMP.tar.gz"
+  BACKUP_FILE="zsh_backup_$TIMESTAMP.7z"
 
-  # NOTE: the whole directory is archived so a restore needs nothing else. The archive is built
-  # in a private temp dir with a 077 umask and lands in iCloud with mode 600
+  # NOTE: the whole directory goes into an AES-256 7z with encrypted headers (-mhe=on hides the
+  # file list too), built in a private temp dir. Paths are stored as .zsh/..., so extracting into
+  # $HOME recreates ~/.zsh
   local staging
   staging="$(mktemp -d)" || return 1
-  (
-    umask 077
-    tar -czf "$staging/$BACKUP_FILE" -C "$HOME" .zsh
-  ) || { command rm -rf "$staging"; return 1 }
+  (cd "$HOME" && umask 077 && "$sevenzip" a -p"$pw" -mhe=on "$staging/$BACKUP_FILE" .zsh >/dev/null) || {
+    print -u2 "backup_zsh: 7-Zip failed to create the archive"
+    command rm -rf "$staging"
+    return 1
+  }
 
   # NOTE: Move the backup to iCloud Drive
   mv "$staging/$BACKUP_FILE" "$BACKUP_DIR/$BACKUP_FILE" || {
@@ -88,13 +103,13 @@ backup_zsh_function() {
 
   # NOTE: Keep only the 5 most recent backups (glob sorted newest first; handles spaces in path)
   local -a backups
-  backups=("$BACKUP_DIR"/zsh_backup_*.tar.gz(N.om))
+  backups=("$BACKUP_DIR"/zsh_backup_*.7z(N.om))
   if (( ${#backups} > 5 )); then
     command rm -f -- "${backups[@]:5}"
   fi
 
   # NOTE: Count remaining backups
-  backups=("$BACKUP_DIR"/zsh_backup_*.tar.gz(N.om))
+  backups=("$BACKUP_DIR"/zsh_backup_*.7z(N.om))
   BACKUP_COUNT=${#backups}
 
   # NOTE: Print success message
